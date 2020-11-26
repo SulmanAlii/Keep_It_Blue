@@ -1,0 +1,35 @@
+---Creación-----------------------------------------------------
+npx create-react-app name-app
+----------------------------------------------------------------
+npm install
+yarn install
+---Complementos instalados--------------------------------------
+npm install --save bootstrap
+yarn add bootstrap
+npm install --save reactstrap react react-dom
+yarn add reactstrap
+npm install leaflet (maps)
+npm install --save styled-components
+npm install --save react-router-dom
+----------------------------------------------------------------
+------(Recursos en codigo introducido)--------------------------
+- src/index.html file (font-awesome (index.html))
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+- bootstrap (App):
+import 'bootstrap/dist/css/bootstrap.min.css';
+----------------------------------------------------------------
+---NODE---------------------------------------------------------
+npm init
+npm i express
+npm i node-fetch
+npm install cors //Solo en caso de tener consultas fuera del propio servidor o consultas de diferentes puertos
+npm install mongodb --save // solo para BBDD mongodb
+
+---Mongodb-------------------------------------------------------
+mongod --dbpath=BBDD
+
+
+
+
+
+
