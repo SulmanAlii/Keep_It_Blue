@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Contenido from './Contenido';
 function App() {
   return (
     <div className="App">
@@ -19,6 +19,7 @@ function App() {
           Learn React
         </a>
       </header>
+      
     </div>
   );
 }
