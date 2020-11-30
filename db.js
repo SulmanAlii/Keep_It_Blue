@@ -1,18 +1,24 @@
 const Sequelize = require('sequelize');
+const opinion = require('./models/opinion');
+const comarca = require('./models/comarca');
+const ubicacion = require('./models/ubicacion');
 
 
-const sequelize = new Sequelize('mapasplayadb','root','MySQLDatabase@1', {
+const sequelize = new Sequelize('mapa','root','MySQLDatabase@1', {
     host : 'localhost',
     dialect: 'mysql'
 })
 
+const opinionTable = opinion(sequelize,Sequelize);
+const comarcaTable = comarca(sequelize,Sequelize);
+const ubicacionTable = ubicacion(sequelize,Sequelize);
 
 sequelize.sync()
 .then((db) => {
-    console.log("DB CREADO");
+    console.log("Conectado con db mapa");
 }).catch((err) => {
     console.log("Error al crear base de datos" + err);
 });
 
 
-module.exports = {sequelize};
+module.exports = {sequelize, opinionTable, comarcaTable, ubicacionTable};

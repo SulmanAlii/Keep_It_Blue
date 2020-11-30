@@ -1,11 +1,19 @@
 const express = require('express');
 const {sequelize} = require('./db');
-const mapasRoute = require('./routes/mapaRoute')
+const opinionRoute = require('./routes/opinionRoute')
+const comarcaRoute = require('./routes/ComarcaRoute')
+const ubicacionRoute = require('./routes/ubicacionRoute')
+
+
 
 
 const app = express();
-app.use("/" , mapasRoute)
-
+app.use(express.json())
+app.use('/img' , express.static('uploads'))
+app.use("/",express.static('public'))
+app.use("/" , opinionRoute)
+app.use("/" , comarcaRoute)
+app.use("/" , ubicacionRoute)
 
 
 
