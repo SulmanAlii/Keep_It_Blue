@@ -46,6 +46,7 @@ router.post("/opinion" ,(req,res) => {
             opinion: req.body.opinion,
             foto: req.file.filename,
             ubicacion_idubicacion : req.body.ubicacion_idubicacion,
+            puntuacion : req.body.puntuacion,
         }
         opinionTable.create(newOpinion)
         .then(item => res.json({ ok: true, data: item }))
