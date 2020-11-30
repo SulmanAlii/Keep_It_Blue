@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import {Collapse,Navbar,NavbarToggler,NavbarBrand,Nav,NavItem,NavLink,Col} from 'reactstrap';
+import Reloj from './components/Reloj';
 
 const Example = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,7 +8,7 @@ const Example = (props) => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <Col>
+    
       <Navbar color="light" light expand="md">
         <NavbarBrand href="/">reactstrap</NavbarBrand>
         <NavbarToggler onClick={toggle} />
@@ -21,8 +22,9 @@ const Example = (props) => {
             </NavItem>
           </Nav>
         </Collapse>
+        <Reloj/>
       </Navbar>
-    </Col>
+    
   );
 }
 

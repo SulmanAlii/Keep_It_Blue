@@ -3,6 +3,7 @@ import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON, Tooltip } from 'react-leaflet';
 import { geoData } from './../datos/geo';
 import { icono } from './../js/iconos';
+import {FormGroup, Label, Input, Col} from 'reactstrap';
 
 const mapboxToken = 'pk.eyJ1IjoiYWxwZWxsYW1hcyIsImEiOiJja2kwazVsdm0wMWVnMnVxcWk0eWhmZGpsIn0.QMm5X6pi1TpBK6eHGACpig';
 
@@ -92,7 +93,7 @@ class Mapa extends Component {
 
   render() {
     return (
-      <div>
+      <Col xs="6">
         <h1 style={{ textAlign: 'center' }}>Mapa de basura</h1>
         <MapContainer style={{ height: '80vh' }} center={[41.392264, 2.202652]} zoom={10} scrollWheelZoom={true}>
           <TileLayer
@@ -115,7 +116,7 @@ class Mapa extends Component {
 
         </MapContainer>
 
-      </div>
+      </Col >
     );
   }
 
