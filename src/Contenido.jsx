@@ -8,12 +8,10 @@ import Navbar from './Navbar';
 export default () => {
     return (
         <>
+          <Navbar/>
           <Container>
             <Row>
-                <Navbar/>
-            </Row>
-            <Row>
-                <Col><h1>MAPA DE BASURA</h1></Col>
+                <Col><h1 style={{ textAlign: 'center' }}>MAPA DE BASURA</h1></Col>
             </Row>
             <Row>
                 <Mapa/>

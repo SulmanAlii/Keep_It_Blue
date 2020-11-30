@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Col } from 'reactstrap';
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON, Tooltip } from 'react-leaflet';
 import { geoData } from './../datos/geo';
@@ -11,7 +12,7 @@ class Mapa extends Component {
   state = {};
 
   // Array para colorear el fondo de cada municipio (layer)
-  arrayColor = ['green', 'yellow', 'orange', 'red'];
+  arrayColor = ['green','greenyellow', 'yellow', 'orange', 'red'];
 
   // Estilos predefinidos para los municipios (layer)
   municipioStyle = {
@@ -92,8 +93,7 @@ class Mapa extends Component {
 
   render() {
     return (
-      <div>
-        <h1 style={{ textAlign: 'center' }}>Mapa de basura</h1>
+      <Col xs="8">
         <MapContainer style={{ height: '80vh' }} center={[41.392264, 2.202652]} zoom={10} scrollWheelZoom={true}>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -115,7 +115,7 @@ class Mapa extends Component {
 
         </MapContainer>
 
-      </div>
+      </Col>
     );
   }
 

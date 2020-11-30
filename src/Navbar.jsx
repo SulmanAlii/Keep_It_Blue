@@ -7,7 +7,7 @@ const Example = (props) => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <Col>
+    
       <Navbar color="light" light expand="md">
         <NavbarBrand href="/">reactstrap</NavbarBrand>
         <NavbarToggler onClick={toggle} />
@@ -22,7 +22,7 @@ const Example = (props) => {
           </Nav>
         </Collapse>
       </Navbar>
-    </Col>
+    
   );
 }
 
