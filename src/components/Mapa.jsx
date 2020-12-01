@@ -4,7 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON, Tooltip } from 'react-leaflet';
 import { geoData } from './../datos/geo';
 import { icono } from './../js/iconos';
-import {FormGroup, Label, Input, Col} from 'reactstrap';
+
 
 const mapboxToken = 'pk.eyJ1IjoiYWxwZWxsYW1hcyIsImEiOiJja2kwazVsdm0wMWVnMnVxcWk0eWhmZGpsIn0.QMm5X6pi1TpBK6eHGACpig';
 
@@ -94,12 +94,8 @@ class Mapa extends Component {
 
   render() {
     return (
-<<<<<<< HEAD
       <Col xs="6">
-        <h1 style={{ textAlign: 'center' }}>Mapa de basura</h1>
-=======
-      <Col xs="8">
->>>>>>> 85c333c1b55ccb0735d0e7779ab3578a2d4164ff
+       
         <MapContainer style={{ height: '80vh' }} center={[41.392264, 2.202652]} zoom={10} scrollWheelZoom={true}>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -121,11 +117,7 @@ class Mapa extends Component {
 
         </MapContainer>
 
-<<<<<<< HEAD
       </Col >
-=======
-      </Col>
->>>>>>> 85c333c1b55ccb0735d0e7779ab3578a2d4164ff
     );
   }
 
