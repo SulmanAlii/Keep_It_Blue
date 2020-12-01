@@ -1,13 +1,8 @@
-<<<<<<< HEAD
 import React, { Component, useState} from "react";
-=======
-import React, { Component } from "react";
->>>>>>> 9bf1ad922c4450ed8b7cba9ba2430a290adf551d
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON, Tooltip } from 'react-leaflet';
 import { geoData } from './../datos/geo';
 import { icono } from './../js/iconos';
-<<<<<<< HEAD
 import {FormGroup, Label, Input, Col,Button} from 'reactstrap';
 import Leaflet from "leaflet";
 import img from '../tree.png';
@@ -16,9 +11,6 @@ import Formulario from './Formulario'
 
 
 
-=======
-import { Col } from 'reactstrap';
->>>>>>> 9bf1ad922c4450ed8b7cba9ba2430a290adf551d
 
 const mapboxToken = 'pk.eyJ1IjoiYWxwZWxsYW1hcyIsImEiOiJja2kwazVsdm0wMWVnMnVxcWk0eWhmZGpsIn0.QMm5X6pi1TpBK6eHGACpig';
 
