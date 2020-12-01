@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 
 
-const sequelize = new Sequelize('mapasplayadb','root','MySQLDatabase@1', {
+const sequelize = new Sequelize('mapa','root','admin1234', {
     host : 'localhost',
     dialect: 'mysql'
 })
