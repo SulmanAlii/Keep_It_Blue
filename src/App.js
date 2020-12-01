@@ -8,6 +8,10 @@ import Leaflet from "leaflet";
 import {Button} from'reactstrap';
 import icon from "leaflet/dist/images/marker-icon.png";
 import img from './tree.png'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+import React from 'react';
+import Contenido from './Contenido';
 
 let DefaultIcon = Leaflet.icon({
   iconUrl: img,
@@ -15,10 +19,7 @@ let DefaultIcon = Leaflet.icon({
 });
 
 Leaflet.Marker.prototype.options.icon = DefaultIcon;
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
-import React from 'react';
-import Contenido from './Contenido';
+
 
 
 
@@ -30,7 +31,6 @@ function App() {
   // console.log(beachName);
 
   return (
-<<<<<<< HEAD
     <div className="App">
     <MapContainer
       center={[41.445609, 2.24273]}
@@ -53,9 +53,6 @@ function App() {
     </MapContainer>
     <h1>{beachName}</h1>
     </div>
-=======
-    <Contenido></Contenido>
->>>>>>> 85c333c1b55ccb0735d0e7779ab3578a2d4164ff
   );
 }
 
