@@ -14,7 +14,7 @@ export default () => {
                 <Col><h1 style={{ textAlign: 'center' }}>MAPA DE BASURA</h1></Col>
             </Row>
             <Row>
-                <Mapa/>
+                <Mapa/> 
             </Row>
           </Container>
         </>
