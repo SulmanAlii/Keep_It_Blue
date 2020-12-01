@@ -1,8 +1,14 @@
 .leaflet-container {
+<<<<<<< HEAD
+  width: 100%;
+=======
   
+>>>>>>> 9bf1ad922c4450ed8b7cba9ba2430a290adf551d
   height: 70vh;
 
 }
 
-						
+div.App{
+  display: flex;
+}						
 /* pk.eyJ1Ijoic3VsbWFuYWxpNDQwIiwiYSI6ImNraTRneXRjYzdrcDYyc2w2eXY0MzlzN3UifQ.j8G-x0jXD42nZfJSCg32JA */
