@@ -11,12 +11,9 @@ import img from './tree.png'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import React from 'react';
-import Mapa from './components/Mapa';
-import Formulario from './components/Formulario';
-
-import Navbar from './Navbar';
-import {Row} from 'reactstrap';
 import Contenido from './Contenido';
+import Formulario from './components/Formulario'
+import Mapa from "./components/Mapa";
 
 let DefaultIcon = Leaflet.icon({
   iconUrl: img,
@@ -26,9 +23,6 @@ let DefaultIcon = Leaflet.icon({
 Leaflet.Marker.prototype.options.icon = DefaultIcon;
 
 
-
-
-
 function App() {
 
   const [beachName,setbeachName] = useState(null);
@@ -36,16 +30,13 @@ function App() {
   // console.log(beachName);
 
   return (
-    <>
+    <div className="App" >
     
-    <Navbar/>
-    <Row>
+    <Mapa />
     
-    <Mapa></Mapa>
-    <Formulario/>
-    </Row><Contenido></Contenido>
-    </>
-   
+    {/*<h1>{beachName}</h1> */ }
+
+    </div>
   );
 }
 
