@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import ReadMoreReact from 'read-more-react';
+// npm install read-more-react
 
 import {
   Card,
