@@ -51,7 +51,8 @@ class Mapa extends Component {
 
   // Funcion para el evento mouseover
   onMunicipioMouseover = (event) => {
-    console.log("mouseover sobre " + event.target.feature.properties.municipio);
+    //console.log("mouseover sobre " + event.target.feature.properties.municipio);
+    event.target.openPopup();
     event.target.setStyle(
       {
         color: "white",
@@ -61,7 +62,7 @@ class Mapa extends Component {
   }
 
   onMunicipioMouseout = (event) => {
-    console.log("mouseover sobre " + event.target.feature.properties.municipio);
+    //console.log("mouseover sobre " + event.target.feature.properties.municipio);
     event.target.setStyle(
       {
         color: "black",
