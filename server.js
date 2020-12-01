@@ -10,9 +10,6 @@ const comarcaRoute = require('./routes/ComarcaRoute')
 const ubicacionRoute = require('./routes/ubicacionRoute')
 
 
-
-
-const app = express();
 app.use(express.json())
 app.use('/img' , express.static('uploads'))
 app.use("/",express.static('public'))
