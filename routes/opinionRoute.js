@@ -4,7 +4,6 @@ const router = express.Router();
 const multer = require('multer');
 
 
-
 //multer es un plugin que facilita la lectura de archivos procedentes de forms
 //aquí se inicializa, indicando que la carpeta es 'uploads'
 const storage = multer.diskStorage({

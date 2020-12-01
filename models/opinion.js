@@ -8,7 +8,6 @@ module.exports =   (sequelize,type) => {
 
     },{tableName: 'opinion', timestamps: false})
 
-
 }
 
 
