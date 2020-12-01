@@ -61,10 +61,11 @@ const EditaFotoContacte = (props) => {
   
 
     return (
-        <>
-            <Col xs="6">
+        <div>
+            <Col xs="3" mx="3">
                 <br />
-                <h3>props.nombrePlaya</h3>
+                <h3 style={{width:"16rem"}}>{props.nombre}</h3>
+
                 <hr />
 
                 <FormGroup>
@@ -78,7 +79,7 @@ const EditaFotoContacte = (props) => {
                 </FormGroup>
 
 
-                <FormGroup>
+                <FormGroup style={{width:"9rem"}}>
                     <h5 for="puntuacion">Puntuacion</h5>
                     <div className="puntuacionEstrellas" 
                     id="puntuacionEstrellas" 
@@ -124,7 +125,7 @@ const EditaFotoContacte = (props) => {
                     <i class="fa fa-floppy-o" aria-hidden="true"></i>
                 </button>
             </Col>
-        </>
+            </div>
         //<Link className='btn btn-primary' to='/contactos' >Volver</Link>
     );
 };
