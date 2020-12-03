@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import 'leaflet/dist/leaflet.css';
-import { MapContainer, TileLayer, Marker, Popup, GeoJSON, Tooltip, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, GeoJSON, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { geoData } from './../datos/geo';
-import { icono } from './../js/iconos';
-import { FormGroup, Label, Input, Col, Button } from 'reactstrap';
+/* import { icono } from './../js/iconos'; */
+import {Col, Button } from 'reactstrap';
 import Leaflet from "leaflet";
 import img from '../tree.png';
 import beach from "../beach.json";
@@ -18,7 +18,7 @@ const arrayColor = ['green', 'yellow', 'orange', 'red'];
 
 const Mapa = () => {
   // Declaramos un state para el centrado del mapa
-  let mapCenter = [41.392264, 2.202652];
+  /* let mapCenter = [41.392264, 2.202652]; */
 
 
   let DefaultIcon = Leaflet.icon({
@@ -30,12 +30,9 @@ const Mapa = () => {
 
   const [beachName, setbeachName] = useState(null);
 
-  // Array para colorear el fondo de cada municipio (layer)
-  const arrayColor = ['green', 'greenyellow', 'yellow', 'orange', 'red'];
-
   function SetGeoJson() {
     const map = useMap();
-    const geojson = L.geoJson();
+    /* const geojson = L.geoJson(); */
 
     // Estilos predefinidos para los municipios (layer)
     const municipioStyle = {
@@ -76,6 +73,9 @@ const Mapa = () => {
       //geojson.resetStyle(layer);
     }
 
+
+
+
     // Para cada uno de los municipios declaramos sus funciones (municipio es el JSON en formato array | layer es la capa del municipio que nos permitira editar su manera de actuar)
     const onEachMunicipio = (municipio, layer) => {
       // Recogemos el nombre del municipio y lo guardamos en la variable 'nameMunicipio'
@@ -104,9 +104,25 @@ const Mapa = () => {
     );
   }
 
-  return (
-    <Col xs="6">
+  // Muestra las playas
+  const playas = beach.map((playa, idx) => (
+    <Marker position={[playa["-l"], playa["-o"]]} >
+      <Popup>
+        {playa["-t"]}
+        <Button style={{ marginLeft: "0.2rem", border: "none", padding: "0.2rem", background: "orange" }} onClick={() => setbeachName(playa["-t"])}>add</Button>
+      </Popup>
+    </Marker>
+  ));
+  const selectplaya = beach.map((el, idx) => (
+    <option key={idx} value={el["-t"]}>{el["-t"]}</option>
+  ));
 
+  return (
+    <Col xs="12">
+      <select className="custom-select" id="inputGroupSelect01">
+        <option selected>Choose...</option>
+        {selectplaya}
+      </select>
       <MapContainer style={{ height: '80vh' }} center={[41.392264, 2.202652]} zoom={10} scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -114,14 +130,7 @@ const Mapa = () => {
           id="mapbox/light-v10"
         />
 
-        {beach.map((playa) => (
-          <Marker position={[playa["-l"], playa["-o"]]} >
-            <Popup>
-              {playa["-t"]}
-              <Button style={{ marginLeft: "0.2rem", border: "none", padding: "0.2rem", background: "orange" }} onClick={() => setbeachName(playa["-t"])}>add</Button>
-            </Popup>
-          </Marker>
-        ))}
+        {playas}
 
         <SetGeoJson />
 
