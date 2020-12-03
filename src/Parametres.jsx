@@ -12,12 +12,12 @@ import {
   Col,
 } from "reactstrap";
 
-const Parametres = ({item, newLike}) => {
+const Parametres = ({ item, newLike }) => {
 
   return (
     <Col>
       <Card>
-        <CardImg src={item.imagen} alt="Card image cap"/>
+        <CardImg src={item.imagen} alt="Card image cap" />
         <CardBody>
           <CardText tag="h6">
             Autor: {item.qui}
@@ -26,13 +26,12 @@ const Parametres = ({item, newLike}) => {
             {item.on}
           </CardText>
           <CardText>
-          <ReadMoreReact 
-        text={item.coment}
-        min={1}
-        ideal={20}
-        max={250} 
-        readMoreText="...Veure tot..."/>
-            {/* {item.coment} */}
+            <ReadMoreReact
+              text={item.coment}
+              min={1}
+              ideal={20}
+              max={250}
+              readMoreText="...Veure tot..." />1
           </CardText>
           {/* <Button color="primary" onClick={() => newLike(item.id)} >Like! <span class="badge badge-light">{item.likes}</span></Button> */}
         </CardBody>

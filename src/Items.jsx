@@ -9,8 +9,6 @@ const EspaiV = styled.div`
   height: ${({ alt }) => alt || "50px"};
 `;
 
-
-
 const Items = () => {
   const [items, setItems] = useState([]);
   const [url, setUrl] = useState();
@@ -34,11 +32,8 @@ const Items = () => {
     }
   };
 
-
-  
-  
   useEffect(() => {
-    if (items.length){
+    if (items.length) {
       guardar();
     }
   }, [items]);
@@ -46,7 +41,6 @@ const Items = () => {
   const guardar = () => {
     localStorage.setItem("mis_items", JSON.stringify(items));
   };
-
 
   const afegir = () => {
     if (url) {
@@ -63,23 +57,23 @@ const Items = () => {
     }
   };
 
-  const newLike = (id) => {
-    if (id) {
-      const newItems = items.map((el) => {
-        if (el.id === id) {
-          el.likes = el.likes + 1;
-        }
-        return el;
-      });
-      setItems(newItems);
-    }
-  };
+  // const newLike = (id) => {
+  //   if (id) {
+  //     const newItems = items.map((el) => {
+  //       if (el.id === id) {
+  //         el.likes = el.likes + 1;
+  //       }
+  //       return el;
+  //     });
+  //     setItems(newItems);
+  //   }
+  // };
 
-  const tots = items.map((el) => (
-    <Col>
-       <Parametres key={el.id} newLike={newLike} item={el} />
-    </Col>
-  ));
+  // const tots = items.map((el) => (
+  //   <Col>
+  //     <Parametres key={el.id} newLike={newLike} item={el} />
+  //   </Col>
+  // ));
 
   return (
     <Container>
@@ -144,7 +138,7 @@ const Items = () => {
             Afegir
           </Button>
         </Col>
-      
+
       </Row>
 
       <EspaiV alt="40px" />
