@@ -10,7 +10,6 @@ import img from '../tree.png';
 import beach from "../beach.json";
 import Formulario from './Formulario'
 
-
 // Token mapbox
 const mapboxToken = 'pk.eyJ1IjoiYWxwZWxsYW1hcyIsImEiOiJja2kwazVsdm0wMWVnMnVxcWk0eWhmZGpsIn0.QMm5X6pi1TpBK6eHGACpig';
 
@@ -115,7 +114,7 @@ const Mapa = () => {
           id="mapbox/light-v10"
         />
 
-        {dataa.map((playa) => (
+        {beach.map((playa) => (
           <Marker position={[playa["-l"], playa["-o"]]} >
             <Popup>
               {playa["-t"]}
