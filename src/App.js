@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import React from 'react';
 import Contenido from './Contenido';
-import Formulario from './components/Formulario'
-import Mapa from "./components/Mapa";
+
+
 
 let DefaultIcon = Leaflet.icon({
   iconUrl: img,
@@ -21,7 +21,7 @@ function App() {
   return (
     <div className="App" >
     
-    <Mapa />
+    <Contenido />
     
     {/*<h1>{beachName}</h1> */ }
 
