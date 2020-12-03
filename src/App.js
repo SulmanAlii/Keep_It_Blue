@@ -1,15 +1,31 @@
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-
 import React from 'react';
-import Mapa from './components/Mapa';
+import Contenido from './Contenido';
 
 
+
+let DefaultIcon = Leaflet.icon({
+  iconUrl: img,
+  iconSize : [40,40]
+});
+
+Leaflet.Marker.prototype.options.icon = DefaultIcon;
 
 
 function App() {
+ 
+
   return (
-    <Mapa></Mapa>
+    <div className="App" >
+    
+    <Contenido />
+    
+    {/*<h1>{beachName}</h1> */ }
+
+    </div>
   );
 }
 

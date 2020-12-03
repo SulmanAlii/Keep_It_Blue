@@ -4,6 +4,12 @@ import { MapContainer, TileLayer, Marker, Popup, GeoJSON, Tooltip, useMap } from
 import L from 'leaflet';
 import { geoData } from './../datos/geo';
 import { icono } from './../js/iconos';
+import { FormGroup, Label, Input, Col, Button } from 'reactstrap';
+import Leaflet from "leaflet";
+import img from '../tree.png';
+import dataa from "../beach.json";
+import Formulario from './Formulario'
+
 
 // Token mapbox
 const mapboxToken = 'pk.eyJ1IjoiYWxwZWxsYW1hcyIsImEiOiJja2kwazVsdm0wMWVnMnVxcWk0eWhmZGpsIn0.QMm5X6pi1TpBK6eHGACpig';
@@ -14,11 +20,24 @@ const arrayColor = ['green', 'yellow', 'orange', 'red'];
 const Mapa = () => {
   // Declaramos un state para el centrado del mapa
   let mapCenter = [41.392264, 2.202652];
-  
+
+
+  let DefaultIcon = Leaflet.icon({
+    iconUrl: img,
+    iconSize: [40, 40]
+  });
+
+  Leaflet.Marker.prototype.options.icon = DefaultIcon;
+
+  const [beachName, setbeachName] = useState(null);
+
+  // Array para colorear el fondo de cada municipio (layer)
+  const arrayColor = ['green', 'greenyellow', 'yellow', 'orange', 'red'];
+
   function SetGeoJson() {
     const map = useMap();
     const geojson = L.geoJson();
-    
+
     // Estilos predefinidos para los municipios (layer)
     const municipioStyle = {
       weight: 1,
@@ -32,23 +51,17 @@ const Mapa = () => {
     // Función para el evento click
     const onMunicipioClick = (event) => {
       const layer = event.target;
-
       map.fitBounds(layer.getBounds());
-
-
     }
 
     // Funcion para el evento mouseover
     const onMunicipioMouseover = (event) => {
-      
       const layer = event.target;
-
       layer.setStyle(
         {
           opacity: 1,
         }
       )
-
       if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
       }
@@ -56,15 +69,12 @@ const Mapa = () => {
 
     const onMunicipioMouseout = (event) => {
       const layer = event.target;
-      
       layer.setStyle(
         {
           opacity: 0.3,
         }
       )
-
       //geojson.resetStyle(layer);
-
     }
 
     // Para cada uno de los municipios declaramos sus funciones (municipio es el JSON en formato array | layer es la capa del municipio que nos permitira editar su manera de actuar)
@@ -89,36 +99,38 @@ const Mapa = () => {
 
     return (
       <>
-        <GeoJSON data={geoData} style={municipioStyle} onEachFeature={onEachMunicipio}/> 
+        <GeoJSON data={geoData} style={municipioStyle} onEachFeature={onEachMunicipio} />
       </>
+
     );
   }
 
   return (
-    <div>
-      <h1 style={{ textAlign: 'center', margin: '5vh' }}>Mapa de basura</h1>
+    <Col xs="6" style={{ display: "flex" }}>
 
-      <MapContainer style={{ height: '80vh' }} center={mapCenter} zoom={10} maxZoom={30} scrollWheelZoom={true}>
+      <MapContainer style={{ height: '80vh' }} center={[41.392264, 2.202652]} zoom={10} scrollWheelZoom={true}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url={`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${mapboxToken}`}
           id="mapbox/light-v10"
         />
 
-        <Marker position={[41.390509, 2.202233]} icon={icono} >
-          <Tooltip direction='top' opacity={1} >
-            <span> Tooltip </span>
-          </Tooltip>
+        {dataa.map((playa) => (
+          <Marker position={[playa["-l"], playa["-o"]]} >
+            <Popup>
+              {playa["-t"]}
+              <Button style={{ marginLeft: "0.2rem", border: "none", padding: "0.2rem", background: "orange" }} onClick={() => setbeachName(playa["-t"])}>add</Button>
+            </Popup>
+          </Marker>
+        ))}
 
-          <Popup>
-            <span> Popup </span>
-          </Popup>
-        </Marker>
-
-        <SetGeoJson></SetGeoJson>
+        <SetGeoJson />
 
       </MapContainer>
-    </div>
+      <Formulario nombre={beachName} />
+
+    </Col >
+
   );
 
 };
