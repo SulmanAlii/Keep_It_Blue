@@ -54,7 +54,6 @@ const Mapa = () => {
       }
     )
   }
-
   // Función para cierre de popup del municipio
   const onMunicipioPopupClose = (event) => {
     event.target.setStyle(
@@ -91,7 +90,6 @@ const Mapa = () => {
   const onEachMunicipio = (municipio, layer) => {
     // Recogemos el nombre del municipio y lo guardamos en la variable 'nameMunicipio'
     let nameMunicipio = municipio.properties.municipio;
-
     // Creamos un popup que mostrará el nombre del municipio en el cual clickemos
     layer.bindPopup(nameMunicipio);
 
