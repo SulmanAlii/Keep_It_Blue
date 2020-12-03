@@ -7,7 +7,7 @@ import { icono } from './../js/iconos';
 import { FormGroup, Label, Input, Col, Button } from 'reactstrap';
 import Leaflet from "leaflet";
 import img from '../tree.png';
-import dataa from "../beach.json";
+import beach from "../beach.json";
 import Formulario from './Formulario'
 
 
