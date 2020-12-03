@@ -105,7 +105,7 @@ const Mapa = () => {
   }
 
   return (
-    <Col xs="6" style={{ display: "flex" }}>
+    <Col xs="6">
 
       <MapContainer style={{ height: '80vh' }} center={[41.392264, 2.202652]} zoom={10} scrollWheelZoom={true}>
         <TileLayer
