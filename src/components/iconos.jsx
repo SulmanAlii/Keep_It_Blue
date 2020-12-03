@@ -4,6 +4,7 @@ import greenflag from "../img/greenflag.png";
 import yellowflag from "../img/yellowflag.png";
 import orangeflag from "../img/orangeflag.png";
 import greenyellowflag from "../img/greenyellowflag.png";
+import beach from "../datos/beach.json";
 
 const icono = new L.Icon({
     iconUrl: greenflag, // url ubicación de imagen
@@ -13,4 +14,11 @@ const icono = new L.Icon({
     popupAnchor: [0, -40] // punto relativo al marcador desde donde se deberá abrir el popup
 });
 
-export { icono };
+const beachOk = beach.map(
+  el => {el.m["-i"] = '0'+el.m["-i"]
+
+  return el;
+
+});
+
+export { icono, beachOk };
