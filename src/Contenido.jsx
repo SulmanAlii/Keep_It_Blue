@@ -4,7 +4,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Mapa from './components/Mapa';
 import Formulario from './components/Formulario';
 import Navbar from './Navbar';
-import Formulario from './components/Formulario';
 
 export default () => {
   return (
