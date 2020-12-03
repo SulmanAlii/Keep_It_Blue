@@ -33,7 +33,7 @@ const EditaFotoContacte = (props) => {
 
     const [nombre, setNombre] = useState('');
     const [comentario, setComentario] = useState('');
-    const [foto, setFoto] = useState(false);
+    const [foto, setFoto] = useState('');
     const [puntuacion, setPuntuacion] = useState('');
     const [volver, setVolver] = useState(false);
 
