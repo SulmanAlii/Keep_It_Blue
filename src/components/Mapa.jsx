@@ -1,12 +1,12 @@
-import React, { Component, useState} from "react";
+import React, { useState } from "react";
 import 'leaflet/dist/leaflet.css';
-import { MapContainer, TileLayer, Marker, Popup, GeoJSON } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, GeoJSON, useMap } from 'react-leaflet';
 import { geoData } from './../datos/geo';
 import { icono } from './../js/iconos';
-import {Col,Button} from 'reactstrap';
+import { Col, Button } from 'reactstrap';
 import Leaflet from "leaflet";
 import img from '../tree.png';
-import dataa from "../beach.json";
+import beach from "../beach.json";
 import Formulario from './Formulario'
 
 
@@ -17,7 +17,7 @@ const mapboxToken = 'pk.eyJ1IjoiYWxwZWxsYW1hcyIsImEiOiJja2kwazVsdm0wMWVnMnVxcWk0
 
 let DefaultIcon = Leaflet.icon({
   iconUrl: img,
-  iconSize : [40,40]
+  iconSize: [40, 40]
 });
 
 Leaflet.Marker.prototype.options.icon = DefaultIcon;
@@ -28,10 +28,12 @@ const Mapa = () => {
 
   // state = {};
 
-  const [beachName,setbeachName] = useState(null);
+  const [beachName, setbeachName] = useState(null);
+  const [posiciongps, setPosiciongps] = useState([41.392264, 2.202652]);
+  const [zoom, setZoom] = useState(10);
 
   // Array para colorear el fondo de cada municipio (layer)
-  const arrayColor = ['green','greenyellow', 'yellow', 'orange', 'red'];
+  const arrayColor = ['green', 'greenyellow', 'yellow', 'orange', 'red'];
 
   // Estilos predefinidos para los municipios (layer)
   const municipioStyle = {
@@ -43,16 +45,18 @@ const Mapa = () => {
     fillOpacity: 0.6
   }
 
-  
 
-  // Función para el evento click
-  const onMunicipioClick = (event) => {
-    event.target.setStyle(
-      {
-        color: "white",
-        fillOpacity: 1
-      }
-    )
+
+  // Función para el evento click (Cambia el state para reubicar el mapa)
+  const onMunicipioClick = (poss) => {
+    setPosiciongps(poss);
+    setZoom(12);
+  }
+  // Función para poner la nueva posicion del mapa y aumentar el zoom
+  const ChangeView = ({ c, z }) => {
+    const map = useMap();
+    map.setView(c, z)
+    return null;
   }
   // Función para cierre de popup del municipio
   const onMunicipioPopupClose = (event) => {
@@ -65,7 +69,7 @@ const Mapa = () => {
   }
 
   // Funcion para el evento mouseover
-  onMunicipioMouseover = (event) => {
+  const onMunicipioMouseover = (event) => {
     //console.log("mouseover sobre " + event.target.feature.properties.municipio);
     event.target.openPopup();
     event.target.setStyle(
@@ -76,7 +80,7 @@ const Mapa = () => {
     )
   }
 
-  onMunicipioMouseout = (event) => {
+  const onMunicipioMouseout = (event) => {
     //console.log("mouseover sobre " + event.target.feature.properties.municipio);
     event.target.setStyle(
       {
@@ -99,41 +103,55 @@ const Mapa = () => {
 
     // Eventos
     layer.on({
-      click: onMunicipioClick,
+      click: () => onMunicipioClick(municipio.properties.geo_point_2d),
       mouseover: onMunicipioMouseover,
       mouseout: onMunicipioMouseout,
       popupclose: onMunicipioPopupClose,
     });
   }
 
-    return (
-      <Col xs="6" style={{display:"flex"}}>
+  const selectplaya = beach.map((el,idx) => (
+    <option key={idx} value={el["-t"]}>{el["-t"]}</option>
+  ));
 
-        <MapContainer style={{ height: '80vh'}} center={[41.392264, 2.202652]} zoom={10} scrollWheelZoom={true}>
+  // Muestra las playas
+  const playas = beach.map((playa, idx) => (
+    <Marker position={[playa["-l"], playa["-o"]]} >
+      <Popup>
+        {playa["-t"]}
+        <Button style={{ marginLeft: "0.2rem", border: "none", padding: "0.2rem", background: "orange" }} onClick={() => setbeachName(playa["-t"])}>add</Button>
+      </Popup>
+    </Marker>
+
+  ));
+
+
+  return (
+    <>
+      <Col xs="12">
+        <select className="custom-select" id="inputGroupSelect01">
+          <option selected>Choose...</option>
+          {selectplaya}
+        </select>
+
+        <MapContainer style={{ height: '80vh' }} center={posiciongps} zoom={zoom} scrollWheelZoom={true}>
+          <ChangeView z={zoom} c={posiciongps} />
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url={`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${mapboxToken}`}
             id="mapbox/light-v10"
           />
-
-          {dataa.map((playa) => (
-            <Marker position={[playa["-l"], playa["-o"]]} >
-              <Popup>
-              {playa["-t"]}
-              <Button style={{marginLeft:"0.2rem", border:"none",padding:"0.2rem", background:"orange"}} onClick={() => setbeachName(playa["-t"])}>add</Button>
-              </Popup>
-            </Marker>
-          ))}
-
-        <GeoJSON data={geoData} style={municipioStyle} onEachFeature={onEachMunicipio} /> 
-
+            {playas}
+          <GeoJSON data={geoData} style={municipioStyle} onEachFeature={onEachMunicipio} />
         </MapContainer>
-        <Formulario nombre={beachName} />
 
       </Col >
- 
-    );
-  
+      <Col xs="6">
+        <Formulario nombre={beachName} />
+      </Col>
+    </>
+  );
+
 
 };
 

@@ -12,11 +12,11 @@ export default () => {
           <Navbar/>
           <Container>
             <Row>
-                <Col><h1 style={{ textAlign: 'center' }}>MAPA DE BASURA</h1></Col>
+                <Col><h1 style={{ textAlign: 'center' }}>TRASHMAP</h1></Col>
             </Row>
             <Row>
                 <Mapa/> 
-                <Formulario/>
+               
             </Row>
           </Container>
         </>
