@@ -3,12 +3,17 @@ import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import { geoData } from './../datos/geo';
-import { icono,beachOk } from './iconos';
-import {Col, Button } from 'reactstrap';
+import comarcas from "../datos/polygons.json";
+import { icono, beachOk } from './iconos';
+import { Col, Button } from 'reactstrap';
 import Leaflet from "leaflet";
 import img from '../tree.png';
 
 import Formulario from './Formulario'
+
+
+console.log(comarcas);
+
 
 // Token mapbox
 const mapboxToken = 'pk.eyJ1IjoiYWxwZWxsYW1hcyIsImEiOiJja2kwazVsdm0wMWVnMnVxcWk0eWhmZGpsIn0.QMm5X6pi1TpBK6eHGACpig';
@@ -16,11 +21,10 @@ const mapboxToken = 'pk.eyJ1IjoiYWxwZWxsYW1hcyIsImEiOiJja2kwazVsdm0wMWVnMnVxcWk0
 // Array para colorear el fondo de cada municipio (layer)
 const arrayColor = ['green', 'yellow', 'orange', 'red'];
 
-console.log(beachOk[0]);
-
 const Mapa = () => {
   // Declaramos el state de playas inicializado null
-  const [playasComarca,setPlayasComarca] = useState([]);
+  const [playasComarca, setPlayasComarca] = useState([]);
+
   const [beachName, setbeachName] = useState(null);
 
   let DefaultIcon = Leaflet.icon({
@@ -29,6 +33,13 @@ const Mapa = () => {
   });
 
   Leaflet.Marker.prototype.options.icon = DefaultIcon;
+
+  function playasFiltradas(layer) {
+    // Comparar cp entre comarca y playa y devuelve un array con las playas que pertenecen a la comarca
+    const correcto = beachOk.filter(el => el.m['-i'] === layer.feature.properties.codigo_postal);
+
+    return correcto;
+  }
 
   function SetGeoJson() {
     const map = useMap();
@@ -47,11 +58,10 @@ const Mapa = () => {
     // Función para el evento click
     const onMunicipioClick = (event) => {
       const layer = event.target;
-      console.log(layer);
+      //console.log(layer);
       map.fitBounds(layer.getBounds());
+      setPlayasComarca(playasFiltradas(layer));
 
-      
-      // Comparar cp de comarca(layer.feature.properties.codigo_postal), beachOk.m['-i']
     }
 
     // Funcion para el evento mouseover
@@ -106,7 +116,7 @@ const Mapa = () => {
   }
 
   // Muestra las playas
-  const playas = beachOk.map((playa, idx) => (
+  const playas = playasComarca.map((playa, idx) => (
     <Marker key={idx} position={[playa["-l"], playa["-o"]]} >
       <Popup>
         {playa["-t"]}
@@ -115,14 +125,16 @@ const Mapa = () => {
     </Marker>
   ));
 
-  const selectplaya = beachOk.map((el, idx) => (
+
+
+  const selectplaya = playasComarca.map((el, idx) => (
     <option key={idx} value={el["-t"]}>{el["-t"]}</option>
   ));
 
   return (
     <Col xs="12">
       <select className="custom-select" id="inputGroupSelect01">
-        <option selected>Choose...</option>
+        <option value="" selected>Escoge la playa ...</option>
         {selectplaya}
       </select>
       <MapContainer style={{ height: '80vh' }} center={[41.392264, 2.202652]} zoom={10} scrollWheelZoom={true}>
