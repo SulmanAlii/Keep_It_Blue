@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON, useMap } from 'react-leaflet';
-import L from 'leaflet';
+import L, { geoJSON } from 'leaflet';
 import { geoData } from './../datos/geo';
 import { icono,beachOk } from './iconos';
 import {Col, Button } from 'reactstrap';
@@ -22,7 +22,6 @@ const Mapa = () => {
   // Declaramos el state de playas inicializado null
   const [playasComarca,setPlayasComarca] = useState([]);
   const [beachName, setbeachName] = useState(null);
-
   let DefaultIcon = Leaflet.icon({
     iconUrl: img,
     iconSize: [40, 40]
@@ -116,13 +115,14 @@ const Mapa = () => {
   ));
 
   const selectplaya = beachOk.map((el, idx) => (
-    <option key={idx} value={el["-t"]}>{el["-t"]}</option>
+    <option key={idx} >{el["-t"]}</option>
   ));
+
 
   return (
     <Col xs="12">
-      <select className="custom-select" id="inputGroupSelect01">
-        <option selected>Choose...</option>
+      <select className="custom-select col-6" >
+        <option selected>Playas</option>
         {selectplaya}
       </select>
       <MapContainer style={{ height: '80vh' }} center={[41.392264, 2.202652]} zoom={10} scrollWheelZoom={true}>
