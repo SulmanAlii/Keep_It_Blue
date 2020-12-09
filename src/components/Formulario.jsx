@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Redirect, Link } from "react-router-dom";
-import { FormGroup, Label, Input, Col, Div, Button } from "reactstrap";
+import { FormGroup, Input, Col, Button } from "reactstrap";
 import styled from "styled-components";
 import Controller from "./FormularioController";
 import '../mapa.css';
