@@ -1,5 +1,7 @@
+import axios from 'axios';
 
 const api_url = 'http://localhost:3000/contactos';
+const api_mapaPost = 'http://localhost:5000/opinion'
 
 export default class Controller {
 
@@ -75,6 +77,17 @@ export default class Controller {
         fetch(api_url + '/' + itemId, { method: 'DELETE' });
     }
 
+
+
+
+    static postComment = (opinion) => {
+      axios.post(api_mapaPost, opinion)
+      .then((result) => {
+          console.log(result);
+      }).catch((err) => {
+          console.log(err);
+      });
+    }
 
 }
 

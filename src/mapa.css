@@ -1,0 +1,5 @@
+.form{
+  
+    transition: ease-in-out;
+    -webkit-transform: ease-in-out;
+}

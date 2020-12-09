@@ -1,0 +1,10 @@
+img.opinion_img{
+    width: 23rem;
+    height: 16rem;
+    object-fit: cover;
+    border-radius: 0.2rem;
+}
+
+.main_container_opinion{
+    margin-top: 0.5rem;
+}
