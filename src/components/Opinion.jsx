@@ -1,8 +1,10 @@
 import React,{useEffect,useState} from 'react'
 import { Col, Container, Row } from 'reactstrap';
-import '../css/opinion.css'
+import '../css/opinion.css';
+import {connect} from 'react-redux';
 
-const Opinion = () => {
+
+const Opinion = (props) => {
 
     const [comentarios, setcomentarios] = useState([])
     const [orderBy, setorderBy] = useState();
@@ -47,6 +49,6 @@ const Opinion = () => {
                 </Row>
         </Container>
     )
-}
 
+    }
 export default Opinion;

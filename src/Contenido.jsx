@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col } from 'reactstrap';
+import { Row, Col, Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Mapa from './components/Mapa';
 import Formulario from './components/Formulario';
@@ -7,7 +7,7 @@ import Navbar from './Navbar';
 
 export default () => {
     return (
-        <>
+        <div>
           <Navbar/>
           <Container style={{margin:"0"}} fluid>
             <Row>
@@ -19,6 +19,6 @@ export default () => {
 
 
           </Container>
-        </>
+          </div>
       );
     }

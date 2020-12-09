@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Redirect, Link } from "react-router-dom";
 import { FormGroup, Label, Input, Col, Div, Button } from "reactstrap";
 import styled from "styled-components";
 import Controller from "./FormularioController";
 import '../mapa.css';
 import '../css/formulario.css'
 //import Puntuador from './Puntuador';
+import {connect} from 'react-redux';
+
 
 
 const InputStyle = styled.input`
@@ -17,7 +18,7 @@ const InputStyle = styled.input`
   background-color: white;
 `; //ubicacion_idubicacion
 
-export default (props) => {
+const Formulario =  (props) => {
   const [nombre, setNombre] = useState("");
   const [municipi, setMunicipio] = useState(props.nomMunicipi);
   const [comentario, setComentario] = useState("");
@@ -27,6 +28,7 @@ export default (props) => {
   const [nomPlaya, setNomplaya] = useState(props.nomplaya);
   const [volver, setVolver] = useState();
   const [active, setActive] = useState(false);
+  const [dataO, setData] = useState([]);
 
 
   // Guardamos la opinion
@@ -43,7 +45,17 @@ export default (props) => {
 
    
     Controller.postComment(data)
-  
+
+    setData(data)
+    console.log(dataO);
+
+
+    setNombre(' ')
+    setComentario(' ')
+    setFoto(' ')
+    setPuntuacion(' ')
+
+    
   };
 
   const setPuntuacionBtn = (event) => {
@@ -107,4 +119,19 @@ export default (props) => {
   );
 };
 
-export default EditaFotoContacte;
+
+
+const mapStateToProps = state => {
+    return {
+      state : state
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getData : (comentarios) => dispatch({type : 'get_opinion', data: comentarios})
+  }
+}
+
+
+export default  connect(mapStateToProps,mapDispatchToProps)(Formulario);
