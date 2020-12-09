@@ -9,6 +9,7 @@ import { Col, Container,Row } from 'reactstrap';
 import Leaflet from "leaflet";
 import img from '../tree.png';
 import Formulario from './Formulario';
+import Opinion from './Opinion';
 
 
 // Token mapbox
@@ -24,6 +25,7 @@ const Mapa = () => {
   const [idcomarca, setidcomarca] = useState();
   const [nomCiudad, setnomCiudad] = useState();
   const [nomPlaya, setplaya] = useState(null);
+
   let DefaultIcon = Leaflet.icon({
     iconUrl: img,
     iconSize: [40, 40]
@@ -105,9 +107,7 @@ const Mapa = () => {
     }
 
     return (
-      <>
         <GeoJSON data={geoData} style={municipioStyle} onEachFeature={onEachMunicipio} />
-      </>
 
     );
   }
@@ -158,6 +158,7 @@ const Mapa = () => {
         {active ? <Formulario nomplaya={nomPlaya}  idcomarca={idcomarca} nomMunicipi={nomCiudad} active={active} setActive={setActive}/> : ""}
       </Col>
       </Row>
+      <Opinion />
     </Container>
 
   );
