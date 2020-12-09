@@ -50,9 +50,9 @@ export default class Controller {
 
         fetch(api_url, opcionesFetch)
             .then(resp => {
-                console.log("nuevo contacto:", resp)
+                console.log("nuevo comentario:", resp)
             })
-            .catch(err => console.log("error nuevo contacto", err));
+            .catch(err => console.log("error nuevo comentario", err));
 
     }
 
