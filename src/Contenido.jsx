@@ -9,13 +9,15 @@ export default () => {
     return (
         <>
           <Navbar/>
-          <Container>
+          <Container style={{margin:"0"}} fluid>
             <Row>
                 <Col><h1 style={{ textAlign: 'center' }}>MAPA DE BASURA</h1></Col>
             </Row>
             <Row>
                 <Mapa/> 
             </Row>
+
+
           </Container>
         </>
       );
