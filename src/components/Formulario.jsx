@@ -5,6 +5,8 @@ import Controller from "./FormularioController";
 import '../mapa.css';
 import '../css/formulario.css'
 //import Puntuador from './Puntuador';
+import {connect} from 'react-redux';
+
 
 
 const InputStyle = styled.input`
@@ -16,7 +18,7 @@ const InputStyle = styled.input`
   background-color: white;
 `; //ubicacion_idubicacion
 
-export default (props) => {
+const Formulario =  (props) => {
   const [nombre, setNombre] = useState("");
   const [municipi, setMunicipio] = useState(props.nomMunicipi);
   const [comentario, setComentario] = useState("");
@@ -26,6 +28,7 @@ export default (props) => {
   const [nomPlaya, setNomplaya] = useState(props.nomplaya);
   const [volver, setVolver] = useState();
   const [active, setActive] = useState(false);
+  const [dataO, setData] = useState([]);
 
 
   // Guardamos la opinion
@@ -42,7 +45,17 @@ export default (props) => {
 
    
     Controller.postComment(data)
-  
+
+    setData(data)
+    console.log(dataO);
+
+
+    setNombre(' ')
+    setComentario(' ')
+    setFoto(' ')
+    setPuntuacion(' ')
+
+    
   };
 
   const setPuntuacionBtn = (event) => {
@@ -106,3 +119,4 @@ export default (props) => {
   );
 };
 
+export default Formulario;
