@@ -4,7 +4,7 @@ const comarca = require('./models/comarca');
 const ubicacion = require('./models/ubicacion');
 
 
-const sequelize = new Sequelize('mapa','root','MySQLDatabase@1', {
+const sequelize = new Sequelize('mapa','root','admin1234', {
     host : 'localhost',
     dialect: 'mysql'
 })
