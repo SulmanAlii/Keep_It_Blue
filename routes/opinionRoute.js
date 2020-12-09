@@ -1,7 +1,10 @@
 const express = require('express');
-const {opinionTable}  = require('../db')
+const {opinionTable}  = require('../db');
+const {comarcaTable} = require('../db');
+const {ubicacionTable} = require('../db');
 const router = express.Router();
 const multer = require('multer');
+const opinion = require('../models/opinion');
 
 
 //multer es un plugin que facilita la lectura de archivos procedentes de forms
@@ -25,9 +28,8 @@ router.get("/", async (req,res) => {
 
 router.get("/opinions", async (req,res) => {
     const getOpinions = await opinionTable.findAll()
-    res.json(getOpinions)
+    res.send(getOpinions)
 })
-
 
 router.post("/opinion" ,(req,res) => {
     if (!req.body) {
@@ -40,16 +42,24 @@ router.post("/opinion" ,(req,res) => {
         } else if (err) {
             return res.status(500).json(err)
         }
+
+
         const newOpinion = {
             nombre: req.body.nombre,
             opinion: req.body.opinion,
             foto: req.file.filename,
-            ubicacion_idubicacion : req.body.ubicacion_idubicacion,
             puntuacion : req.body.puntuacion,
+            nomplatja : req.body.nomplatja,
+            idcomarca: req.body.idcomarca,
+            nomcomarca : req.body.nomcomarca
+            
         }
+
+
+
         opinionTable.create(newOpinion)
-        .then(item => res.json({ ok: true, data: item }))
-        .catch(err => res.json({error: err }));
+        .then(item => res.json({item}))
+        .catch(err => res.json(err));
     })
 })
 

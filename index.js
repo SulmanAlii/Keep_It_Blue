@@ -3,11 +3,14 @@ const {sequelize} = require('./db');
 const opinionRoute = require('./routes/opinionRoute')
 const comarcaRoute = require('./routes/ComarcaRoute')
 const ubicacionRoute = require('./routes/ubicacionRoute')
+const cors = require('cors');
+
 
 
 
 
 const app = express();
+app.use(cors())
 app.use(express.json())
 app.use('/img' , express.static('uploads'))
 app.use("/",express.static('public'))
