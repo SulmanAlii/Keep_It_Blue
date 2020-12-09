@@ -107,4 +107,3 @@ export default (props) => {
   );
 };
 
-export default EditaFotoContacte;
