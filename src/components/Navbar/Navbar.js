@@ -21,11 +21,7 @@ class Navbar extends Component {
         return (
             <BrowserRouter>
                 <nav className="NavbarItems">
-
-                    <h1 className="navbar-logo">
-                        <img className="logoForma" src={logo} alt='' width='160px'></img>
-                        <i className=""></i> </h1>
-
+                    <img className="logoForma" src={logo} alt='' width='160px' />
                     <div className="menu-icon" onClick={this.handleClick}>
                         <i className={this.state.clicked ? 'fa fa-times' : 'fa fa-bars'}></i>
                     </div>
@@ -42,7 +38,7 @@ class Navbar extends Component {
                     </ul>
                     <Button>Sign Up</Button>
                 </nav>
-                        <br/>
+                <br />
                 <Switch>
                     <Route exact path="/" render={() => <Mapa />} />
                     <Route path="/Contacta" render={() => <Contacto />} />
