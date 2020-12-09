@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FormGroup, Label, Input, Col, Div, Button } from "reactstrap";
+import { FormGroup, Input, Col, Button } from "reactstrap";
 import styled from "styled-components";
 import Controller from "./FormularioController";
 import '../mapa.css';
@@ -119,19 +119,4 @@ const Formulario =  (props) => {
   );
 };
 
-
-
-const mapStateToProps = state => {
-    return {
-      state : state
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    getData : (comentarios) => dispatch({type : 'get_opinion', data: comentarios})
-  }
-}
-
-
-export default  connect(mapStateToProps,mapDispatchToProps)(Formulario);
+export default Formulario;
