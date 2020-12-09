@@ -5,7 +5,7 @@ import L from 'leaflet';
 import { geoData } from './../datos/geo';
 import comarcas from "../datos/polygons.json";
 import { icono, beachOk } from './iconos';
-import { Col, Button } from 'reactstrap';
+import { Col, Button, Container } from 'reactstrap';
 import Leaflet from "leaflet";
 import img from '../tree.png';
 
@@ -132,26 +132,28 @@ const Mapa = () => {
   ));
 
   return (
-    <Col xs="12">
-      <select className="custom-select" id="inputGroupSelect01">
-        <option value="" selected>Escoge la playa ...</option>
-        {selectplaya}
-      </select>
-      <MapContainer style={{ height: '80vh' }} center={[41.392264, 2.202652]} zoom={10} scrollWheelZoom={true}>
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url={`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${mapboxToken}`}
-          id="mapbox/light-v10"
-        />
+    <Container>
+      <Col xs="12">
+        <select className="custom-select" id="inputGroupSelect01">
+          <option value="" selected>Escoge la playa ...</option>
+          {selectplaya}
+        </select>
+        <MapContainer style={{ height: '80vh' }} center={[41.392264, 2.202652]} zoom={10} scrollWheelZoom={true}>
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url={`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${mapboxToken}`}
+            id="mapbox/light-v10"
+          />
 
-        {playas}
+          {playas}
 
-        <SetGeoJson />
+          <SetGeoJson />
 
-      </MapContainer>
-      <Formulario nombre={beachName} />
+        </MapContainer>
+        <Formulario nombre={beachName} />
 
-    </Col >
+      </Col >
+    </Container>
 
   );
 
