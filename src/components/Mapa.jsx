@@ -105,6 +105,33 @@ const Mapa = () => {
         mouseout: onMunicipioMouseout,
       });
     }
+      //------------LEYENDA-------------------------------------------------------------
+      function getColor(d) {
+        return d > 5 ? 'green' :
+          d > 4 ? 'yellow' :
+            d > 3 ? 'orange' :
+              d > 2 ? 'red' :
+                d > 1 ? 'black' :
+                  'blue';
+      }
+  
+      const legend = L.control({ position: 'bottomright' });
+  
+      legend.onAdd = function (map) {
+  
+        const div = L.DomUtil.create('div.leg', 'info legend'),
+          grades = [0, 1, 2, 3, 4, 5];
+  
+        for (let i = 0; i < grades.length; i++) {
+          div.innerHTML +=
+          '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+          grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+        }
+  
+        return div;
+      };
+        legend.addTo(map);
+    //=========================================================================================
 
     return (
         <GeoJSON data={geoData} style={municipioStyle} onEachFeature={onEachMunicipio} />
