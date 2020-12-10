@@ -3,12 +3,14 @@ import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON, useMap } from 'react-leaflet';
 import L, { geoJSON } from 'leaflet';
 import { geoData } from './../datos/geo';
-import { icono,beachOk } from './iconos';
-import {Col, Button } from 'reactstrap';
+import comarcas from "../datos/polygons.json";
+import { icono, beachOk } from './iconos';
+import { Col, Container,Row } from 'reactstrap';
 import Leaflet from "leaflet";
 import img from '../tree.png';
+import Formulario from './Formulario';
+import Opinion from './Opinion';
 
-import Formulario from './Formulario'
 
 // Token mapbox
 const mapboxToken = 'pk.eyJ1IjoiYWxwZWxsYW1hcyIsImEiOiJja2kwazVsdm0wMWVnMnVxcWk0eWhmZGpsIn0.QMm5X6pi1TpBK6eHGACpig';
@@ -16,18 +18,27 @@ const mapboxToken = 'pk.eyJ1IjoiYWxwZWxsYW1hcyIsImEiOiJja2kwazVsdm0wMWVnMnVxcWk0
 // Array para colorear el fondo de cada municipio (layer)
 const arrayColor = ['green', 'yellow', 'orange', 'red'];
 
-console.log(beachOk[0]);
-
 const Mapa = () => {
   // Declaramos el state de playas inicializado null
-  const [playasComarca,setPlayasComarca] = useState([]);
-  const [beachName, setbeachName] = useState(null);
+  const [playasComarca, setPlayasComarca] = useState([]);
+  const [active, setActive] = useState(false);
+  const [idcomarca, setidcomarca] = useState();
+  const [nomCiudad, setnomCiudad] = useState();
+  const [nomPlaya, setplaya] = useState(null);
+
   let DefaultIcon = Leaflet.icon({
     iconUrl: img,
     iconSize: [40, 40]
   });
 
   Leaflet.Marker.prototype.options.icon = DefaultIcon;
+
+  function playasFiltradas(layer) {
+    // Comparar cp entre comarca y playa y devuelve un array con las playas que pertenecen a la comarca
+    const correcto = beachOk.filter(el => el.m['-i'] === layer.feature.properties.codigo_postal);
+
+    return correcto;
+  }
 
   function SetGeoJson() {
     const map = useMap();
@@ -46,11 +57,10 @@ const Mapa = () => {
     // Función para el evento click
     const onMunicipioClick = (event) => {
       const layer = event.target;
-      console.log(layer);
+      //console.log(layer);
       map.fitBounds(layer.getBounds());
+      setPlayasComarca(playasFiltradas(layer));
 
-      
-      // Comparar cp de comarca(layer.feature.properties.codigo_postal), beachOk.m['-i']
     }
 
     // Funcion para el evento mouseover
@@ -97,49 +107,60 @@ const Mapa = () => {
     }
 
     return (
-      <>
         <GeoJSON data={geoData} style={municipioStyle} onEachFeature={onEachMunicipio} />
-      </>
 
     );
   }
+  //Activa el formulario
+  const addtoform = (nomPlaya,idcomarca,nomCiudad) => {
+    setplaya(nomPlaya);
+    setidcomarca(idcomarca)
+    setnomCiudad(nomCiudad)
+
+    setActive(true);
+  };
 
   // Muestra las playas
-  const playas = beachOk.map((playa, idx) => (
+  const playas = playasComarca.map((playa, idx) => (
     <Marker key={idx} position={[playa["-l"], playa["-o"]]} >
       <Popup>
         {playa["-t"]}
-        <Button style={{ marginLeft: "0.2rem", border: "none", padding: "0.2rem", background: "orange" }} onClick={() => setbeachName(playa["-t"])}>add</Button>
+        <i class="fa fa-plus" aria-hidden="true" onClick={() => addtoform(playa["-t"],playa["-i"],playa.m["-t"])} ></i>
       </Popup>
     </Marker>
   ));
 
-  const selectplaya = beachOk.map((el, idx) => (
-    <option key={idx} >{el["-t"]}</option>
+  
+
+  const selectplaya = playasComarca.map((el, idx) => (
+    <option key={idx} value={el["-t"]}>{el["-t"]}</option>
   ));
 
 
   return (
-    <Col xs="12">
-      <select className="custom-select col-6" >
-        <option selected>Playas</option>
-        {selectplaya}
-      </select>
-      <MapContainer style={{ height: '80vh' }} center={[41.392264, 2.202652]} zoom={10} scrollWheelZoom={true}>
-        <TileLayer
-          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-          url={`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${mapboxToken}`}
-          id="mapbox/light-v10"
-        />
-
-        {playas}
-
-        <SetGeoJson />
-
-      </MapContainer>
-      <Formulario nombre={beachName} />
-
-    </Col >
+    <Container fluid>
+      <Row>
+      <Col xs={active ? "7" : "12"} >
+        <select className="custom-select" id="inputGroupSelect01">
+          <option value="" selected>Escoge la playa ...</option>
+          {selectplaya}
+        </select>
+        <MapContainer style={{ height: '75vh' }} center={[41.392264, 2.202652]} zoom={10} scrollWheelZoom={true}>
+          <TileLayer
+            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url={`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${mapboxToken}`}
+            id="mapbox/light-v10"
+          />
+          {playas}
+          <SetGeoJson />
+        </MapContainer>
+      </Col >
+      <Col>
+        {active ? <Formulario nomplaya={nomPlaya}  idcomarca={idcomarca} nomMunicipi={nomCiudad} active={active} setActive={setActive}/> : ""}
+      </Col>
+      </Row>
+      <Opinion />
+    </Container>
 
   );
 
