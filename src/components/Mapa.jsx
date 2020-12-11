@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON, useMap } from 'react-leaflet';
 import L, { geoJSON } from 'leaflet';
@@ -57,7 +57,6 @@ const Mapa = () => {
     // Función para el evento click
     const onMunicipioClick = (event) => {
       const layer = event.target;
-      //console.log(layer);
       map.fitBounds(layer.getBounds());
       setPlayasComarca(playasFiltradas(layer));
 
@@ -114,23 +113,29 @@ const Mapa = () => {
                 d > 1 ? 'black' :
                   'blue';
       }
+      function leyenda() {
+        const legend = L.control({ position: 'bottomright' });
   
-      const legend = L.control({ position: 'bottomright' });
-  
-      legend.onAdd = function (map) {
-  
-        const div = L.DomUtil.create('div.leg', 'info legend'),
-          grades = [0, 1, 2, 3, 4, 5];
-  
-        for (let i = 0; i < grades.length; i++) {
-          div.innerHTML +=
-          '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-          grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-        }
-  
-        return div;
-      };
-        legend.addTo(map);
+        legend.onAdd = function (map) {
+          const div = L.DomUtil.create('div.leg', 'info legend'),
+            grades = [0, 1, 2, 3, 4, 5];
+          for (let i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            grades[i] + '<br>';
+          }
+    
+          return div;
+        };
+          
+          legend.addTo(map);
+          return legend;
+      }
+      useEffect(() => {
+        const legend = leyenda();
+        return () => map.removeControl(legend);
+      }, []);
+
     //=========================================================================================
 
     return (
