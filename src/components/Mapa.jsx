@@ -170,7 +170,7 @@ const Mapa = () => {
 
 
   return (
-    <Container fluid>
+    <Container>
       <Row>
       <Col xs={active ? "7" : "12"} >
         <select className="custom-select" id="inputGroupSelect01">
