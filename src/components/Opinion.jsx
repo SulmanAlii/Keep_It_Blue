@@ -25,8 +25,6 @@ const Opinion = (props) => {
         
     }
 
-    console.log(comentarios);
-
  
         const posts = comentarios.map(value => {
            return  <Col xs="4" key={value.id}>

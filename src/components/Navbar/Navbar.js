@@ -7,6 +7,9 @@ import KeepItBlue from './KeepItBlue.png';
 import Contacto from './Contacto';
 import CrearEvento from '../CrearEvento';
 //import Login from '../Login';
+import Proyecto from './Proyecto';
+import Nosotros from './Nosotros';
+import Totem from './Totem';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 
@@ -44,7 +47,7 @@ class Navbar extends Component {
                     </ul>
                     <Button>Registrate</Button>
                 </nav>
-                        <br/>
+                <br />
                 <Switch>
                     <Route exact path="/" render={() => <Mapa />} />
                     <Route path="/Contacta" render={() => <Contacto />} />
@@ -52,6 +55,10 @@ class Navbar extends Component {
                     {/* <Route path="/Nosotros" render={() => <Nosotros />} /> */}
                     <Route path="/crear-evento" render={() => <CrearEvento />} /> 
                     {/* <Route path="/login" render={() =><Login />} /> */} 
+                    <Route path="/Proyecto" render={() => <Proyecto />} /> 
+                    <Route path="/Nosotros" render={() => <Nosotros />} /> 
+                    <Route path="/Totem" render={() => <Totem />} /> 
+                    {/* <Route path="/SignUp" render={() => <SignUp />} /> */}
                 </Switch>
             </BrowserRouter>
         )

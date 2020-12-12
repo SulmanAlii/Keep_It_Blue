@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON, useMap } from 'react-leaflet';
-import L from 'leaflet';
+import L, { geoJSON } from 'leaflet';
 import { geoData } from './../datos/geo';
 import comarcas from "../datos/polygons.json";
 import { icono, beachOk } from './iconos';
@@ -57,7 +57,6 @@ const Mapa = () => {
     // Función para el evento click
     const onMunicipioClick = (event) => {
       const layer = event.target;
-      //console.log(layer);
       map.fitBounds(layer.getBounds());
       setPlayasComarca(playasFiltradas(layer));
 
@@ -105,6 +104,39 @@ const Mapa = () => {
         mouseout: onMunicipioMouseout,
       });
     }
+      //------------LEYENDA-------------------------------------------------------------
+      function getColor(d) {
+        return d > 5 ? 'green' :
+          d > 4 ? 'yellow' :
+            d > 3 ? 'orange' :
+              d > 2 ? 'red' :
+                d > 1 ? 'black' :
+                  'blue';
+      }
+      function leyenda() {
+        const legend = L.control({ position: 'bottomright' });
+  
+        legend.onAdd = function (map) {
+          const div = L.DomUtil.create('div.leg', 'info legend'),
+            grades = [0, 1, 2, 3, 4, 5];
+          for (let i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            grades[i] + '<br>';
+          }
+    
+          return div;
+        };
+          
+          legend.addTo(map);
+          return legend;
+      }
+      useEffect(() => {
+        const legend = leyenda();
+        return () => map.removeControl(legend);
+      }, []);
+
+    //=========================================================================================
 
     return (
         <GeoJSON data={geoData} style={municipioStyle} onEachFeature={onEachMunicipio} />
@@ -135,6 +167,7 @@ const Mapa = () => {
   const selectplaya = playasComarca.map((el, idx) => (
     <option key={idx} value={el["-t"]}>{el["-t"]}</option>
   ));
+
 
   return (
     <Container fluid>
