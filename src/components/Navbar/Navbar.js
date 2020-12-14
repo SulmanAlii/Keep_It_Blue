@@ -5,6 +5,9 @@ import Mapa from '../Mapa';
 /* import './Navbar.css'; */
 import logo from './logo.png';
 import Contacto from './Contacto';
+import Proyecto from './Proyecto';
+import Nosotros from './Nosotros';
+import Totem from './Totem';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 
@@ -42,9 +45,9 @@ class Navbar extends Component {
                 <Switch>
                     <Route exact path="/" render={() => <Mapa />} />
                     <Route path="/Contacta" render={() => <Contacto />} />
-                    {/* <Route path="/Proyecto" render={() => <Proyecto />} /> */}
-                    {/* <Route path="/Nosotros" render={() => <Nosotros />} /> */}
-                    {/* <Route path="/Totem" render={() => <Totem />} /> */}
+                    <Route path="/Proyecto" render={() => <Proyecto />} /> 
+                    <Route path="/Nosotros" render={() => <Nosotros />} /> 
+                    <Route path="/Totem" render={() => <Totem />} /> 
                     {/* <Route path="/SignUp" render={() => <SignUp />} /> */}
                 </Switch>
             </BrowserRouter>

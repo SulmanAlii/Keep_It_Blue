@@ -127,23 +127,29 @@ const Mapa = () => {
                 d >= 1 ? 'black' :
                   'blue';
       }
+      function leyenda() {
+        const legend = L.control({ position: 'bottomright' });
   
-      const legend = L.control({ position: 'bottomright' });
-  
-      legend.onAdd = function (map) {
-  
-        const div = L.DomUtil.create('div.leg', 'info legend'),
-          grades = [0, 1, 2, 3, 4, 5];
-  
-        for (let i = 0; i < grades.length; i++) {
-          div.innerHTML +=
-          '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
-          grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-        }
-  
-        return div;
-      };
-        legend.addTo(map);
+        legend.onAdd = function (map) {
+          const div = L.DomUtil.create('div.leg', 'info legend'),
+            grades = [0, 1, 2, 3, 4, 5];
+          for (let i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            grades[i] + '<br>';
+          }
+    
+          return div;
+        };
+          
+          legend.addTo(map);
+          return legend;
+      }
+      useEffect(() => {
+        const legend = leyenda();
+        return () => map.removeControl(legend);
+      }, []);
+
     //=========================================================================================
       if(puntuaciones){
         return (
@@ -177,18 +183,18 @@ const Mapa = () => {
     </Marker>
   )); 
 
-  const selectplaya = playasComarca.map((el, idx) => (
+/*   const selectplaya = playasComarca.map((el, idx) => (
     <option key={idx} value={el["-t"]}>{el["-t"]}</option>
-  ));
+  )); */
 
   return (
-    <Container fluid>
+    <Container>
       <Row>
       <Col xs={active ? "7" : "12"} >
-        <select className="custom-select" id="inputGroupSelect01">
+        {/* <select className="custom-select" id="inputGroupSelect01">
           <option value="" selected>Escoge la playa ...</option>
           {selectplaya}
-        </select>
+        </select> */}
         <MapContainer style={{ height: '75vh' }} center={[41.392264, 2.202652]} zoom={10} scrollWheelZoom={true}>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

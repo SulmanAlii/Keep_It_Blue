@@ -1,159 +1,201 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON, useMap } from 'react-leaflet';
+import L, { geoJSON } from 'leaflet';
 import { geoData } from './../datos/geo';
-import { icono } from './../js/iconos';
-import { Col, Button } from 'reactstrap';
+import comarcas from "../datos/polygons.json";
+import { icono, beachOk } from './iconos';
+import { Col, Container,Row } from 'reactstrap';
 import Leaflet from "leaflet";
 import img from '../tree.png';
-import beach from "../beach.json";
-import Formulario from './Formulario'
+import Formulario from './Formulario';
+import Opinion from './Opinion';
 
 
-
-
+// Token mapbox
 const mapboxToken = 'pk.eyJ1IjoiYWxwZWxsYW1hcyIsImEiOiJja2kwazVsdm0wMWVnMnVxcWk0eWhmZGpsIn0.QMm5X6pi1TpBK6eHGACpig';
 
-
-let DefaultIcon = Leaflet.icon({
-  iconUrl: img,
-  iconSize: [40, 40]
-});
-
-Leaflet.Marker.prototype.options.icon = DefaultIcon;
-
-
+// Array para colorear el fondo de cada municipio (layer)
+const arrayColor = ['green', 'yellow', 'orange', 'red'];
 
 const Mapa = () => {
+  // Declaramos el state de playas inicializado null
+  const [playasComarca, setPlayasComarca] = useState([]);
+  const [active, setActive] = useState(false);
+  const [idcomarca, setidcomarca] = useState();
+  const [nomCiudad, setnomCiudad] = useState();
+  const [nomPlaya, setplaya] = useState(null);
 
-  // state = {};
+  let DefaultIcon = Leaflet.icon({
+    iconUrl: img,
+    iconSize: [40, 40]
+  });
 
-  const [beachName, setbeachName] = useState(null);
-  const [posiciongps, setPosiciongps] = useState([41.392264, 2.202652]);
-  const [zoom, setZoom] = useState(10);
+  Leaflet.Marker.prototype.options.icon = DefaultIcon;
 
-  // Array para colorear el fondo de cada municipio (layer)
-  const arrayColor = ['green', 'greenyellow', 'yellow', 'orange', 'red'];
+  function playasFiltradas(layer) {
+    // Comparar cp entre comarca y playa y devuelve un array con las playas que pertenecen a la comarca
+    const correcto = beachOk.filter(el => el.m['-i'] === layer.feature.properties.codigo_postal);
 
-  // Estilos predefinidos para los municipios (layer)
-  const municipioStyle = {
-    weight: 2,
-    opacity: 1,
-    color: 'black',
-    dashArray: 1,
-    fillColor: 'blue',
-    fillOpacity: 0.6
+    return correcto;
   }
 
-
-
-  // Función para el evento click (Cambia el state para reubicar el mapa)
-  const onMunicipioClick = (poss) => {
-    setPosiciongps(poss);
-    setZoom(12);
-  }
-  // Función para poner la nueva posicion del mapa y aumentar el zoom
-  const ChangeView = ({ c, z }) => {
+  function SetGeoJson() {
     const map = useMap();
-    map.setView(c, z)
-    return null;
-  }
-  // Función para cierre de popup del municipio
-  const onMunicipioPopupClose = (event) => {
-    event.target.setStyle(
-      {
-        color: "black",
-        fillOpacity: 0.6
+    /* const geojson = L.geoJson(); */
+
+    // Estilos predefinidos para los municipios (layer)
+    const municipioStyle = {
+      weight: 1,
+      opacity: 0.3,
+      color: 'black',
+      dashArray: 10,
+      fillColor: 'blue',
+      fillOpacity: 0.3
+    }
+
+    // Función para el evento click
+    const onMunicipioClick = (event) => {
+      const layer = event.target;
+      map.fitBounds(layer.getBounds());
+      setPlayasComarca(playasFiltradas(layer));
+
+    }
+
+    // Funcion para el evento mouseover
+    const onMunicipioMouseover = (event) => {
+      const layer = event.target;
+      layer.setStyle(
+        {
+          opacity: 1,
+        }
+      )
+      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
       }
-    )
-  }
+    }
 
-  // Funcion para el evento mouseover
-  const onMunicipioMouseover = (event) => {
-    //console.log("mouseover sobre " + event.target.feature.properties.municipio);
-    event.target.openPopup();
-    event.target.setStyle(
-      {
-        color: "white",
-        fillOpacity: 1
+    const onMunicipioMouseout = (event) => {
+      const layer = event.target;
+      layer.setStyle(
+        {
+          opacity: 0.3,
+        }
+      )
+      //geojson.resetStyle(layer);
+    }
+
+    // Para cada uno de los municipios declaramos sus funciones (municipio es el JSON en formato array | layer es la capa del municipio que nos permitira editar su manera de actuar)
+    const onEachMunicipio = (municipio, layer) => {
+      // Recogemos el nombre del municipio y lo guardamos en la variable 'nameMunicipio'
+      let nameMunicipio = municipio.properties.municipio;
+
+      // Creamos un popup que mostrará el nombre del municipio en el cual clickemos
+      layer.bindPopup(nameMunicipio);
+
+      // Creamos una constante aleatoria para definir el color del municipio en función del array de colores
+      const indexColor = Math.floor(Math.random() * arrayColor.length);
+      layer.options.fillColor = arrayColor[indexColor];
+
+      // Eventos
+      layer.on({
+        click: onMunicipioClick,
+        mouseover: onMunicipioMouseover,
+        mouseout: onMunicipioMouseout,
+      });
+    }
+      //------------LEYENDA-------------------------------------------------------------
+      function getColor(d) {
+        return d > 5 ? 'green' :
+          d > 4 ? 'yellow' :
+            d > 3 ? 'orange' :
+              d > 2 ? 'red' :
+                d > 1 ? 'black' :
+                  'blue';
       }
-    )
-  }
-
-  const onMunicipioMouseout = (event) => {
-    //console.log("mouseover sobre " + event.target.feature.properties.municipio);
-    event.target.setStyle(
-      {
-        color: "black",
-        fillOpacity: 0.6
+      function leyenda() {
+        const legend = L.control({ position: 'bottomright' });
+  
+        legend.onAdd = function (map) {
+          const div = L.DomUtil.create('div.leg', 'info legend'),
+            grades = [0, 1, 2, 3, 4, 5];
+          for (let i = 0; i < grades.length; i++) {
+            div.innerHTML +=
+            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            grades[i] + '<br>';
+          }
+    
+          return div;
+        };
+          
+          legend.addTo(map);
+          return legend;
       }
-    )
+      useEffect(() => {
+        const legend = leyenda();
+        return () => map.removeControl(legend);
+      }, []);
+
+    //=========================================================================================
+
+    return (
+        <GeoJSON data={geoData} style={municipioStyle} onEachFeature={onEachMunicipio} />
+
+    );
   }
+  //Activa el formulario
+  const addtoform = (nomPlaya,idcomarca,nomCiudad) => {
+    setplaya(nomPlaya);
+    setidcomarca(idcomarca)
+    setnomCiudad(nomCiudad)
 
-  // Para cada uno de los municipios declaramos sus funciones (municipio es el JSON en formato array | layer es la capa del municipio que nos permitira editar su manera de actuar)
-  const onEachMunicipio = (municipio, layer) => {
-    // Recogemos el nombre del municipio y lo guardamos en la variable 'nameMunicipio'
-    let nameMunicipio = municipio.properties.municipio;
-    // Creamos un popup que mostrará el nombre del municipio en el cual clickemos
-    layer.bindPopup(nameMunicipio);
-
-    // Creamos una constante aleatoria para definir el color del municipio en función del array de colores
-    const indexColor = Math.floor(Math.random() * arrayColor.length);
-    layer.options.fillColor = arrayColor[indexColor];
-
-    // Eventos
-    layer.on({
-      click: () => onMunicipioClick(municipio.properties.geo_point_2d),
-      mouseover: onMunicipioMouseover,
-      mouseout: onMunicipioMouseout,
-      popupclose: onMunicipioPopupClose,
-    });
-  }
-
-  const selectplaya = beach.map((el,idx) => (
-    <option key={idx} value={el["-t"]}>{el["-t"]}</option>
-  ));
+    setActive(true);
+  };
 
   // Muestra las playas
-  const playas = beach.map((playa, idx) => (
-    <Marker position={[playa["-l"], playa["-o"]]} >
+  const playas = playasComarca.map((playa, idx) => (
+    <Marker key={idx} position={[playa["-l"], playa["-o"]]} >
       <Popup>
         {playa["-t"]}
-        <Button style={{ marginLeft: "0.2rem", border: "none", padding: "0.2rem", background: "orange" }} onClick={() => setbeachName(playa["-t"])}>add</Button>
+        <i class="fa fa-plus" aria-hidden="true" onClick={() => addtoform(playa["-t"],playa["-i"],playa.m["-t"])} ></i>
       </Popup>
     </Marker>
+  ));
 
+  
+
+  const selectplaya = playasComarca.map((el, idx) => (
+    <option key={idx} value={el["-t"]}>{el["-t"]}</option>
   ));
 
 
   return (
-    <>
-      <Col xs="12">
+    <Container>
+      <Row>
+      <Col xs={active ? "7" : "12"} >
         <select className="custom-select" id="inputGroupSelect01">
-          <option selected>Choose...</option>
+          <option value="" selected>Escoge la playa ...</option>
           {selectplaya}
         </select>
-
-        <MapContainer style={{ height: '80vh' }} center={posiciongps} zoom={zoom} scrollWheelZoom={true}>
-          <ChangeView z={zoom} c={posiciongps} />
+        <MapContainer style={{ height: '75vh' }} center={[41.392264, 2.202652]} zoom={10} scrollWheelZoom={true}>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url={`https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${mapboxToken}`}
             id="mapbox/light-v10"
           />
-            {playas}
-          <GeoJSON data={geoData} style={municipioStyle} onEachFeature={onEachMunicipio} />
+          {playas}
+          <SetGeoJson />
         </MapContainer>
-
       </Col >
-      <Col xs="6">
-        <Formulario nombre={beachName} />
+      <Col>
+        {active ? <Formulario nomplaya={nomPlaya}  idcomarca={idcomarca} nomMunicipi={nomCiudad} active={active} setActive={setActive}/> : ""}
       </Col>
-    </>
+      </Row>
+      <Opinion />
+    </Container>
+
   );
 
-
 };
-
 
 export default Mapa;
