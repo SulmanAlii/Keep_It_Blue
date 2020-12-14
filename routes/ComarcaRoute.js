@@ -24,7 +24,6 @@ router.get('/comarca/puntuaciones', function (req, res, next) {
         .catch((error) => res.json({ ok: false, error: error }));
 });
 
-
 router.post("/comarca", async (req,res) => {
     
     if (!req.body) {

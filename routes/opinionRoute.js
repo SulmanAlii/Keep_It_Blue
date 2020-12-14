@@ -1,8 +1,7 @@
 const express = require('express');
-const {opinionTable}  = require('../db');
-const {comarcaTable} = require('../db');
-const {ubicacionTable} = require('../db');
+const {sequelize,opinionTable}  = require('../db');
 const router = express.Router();
+
 const multer = require('multer');
 const opinion = require('../models/opinion');
 
@@ -30,6 +29,22 @@ router.get("/opinions", async (req,res) => {
     const getOpinions = await opinionTable.findAll()
     res.send(getOpinions)
 })
+
+// Query RAW Ricard
+router.get('/opinion/puntuaciones', function (req, res, next) {
+    sequelize.query(
+        `
+        SELECT nomplatja ,AVG(puntuacion) 
+        FROM opinion 
+        GROUP BY nomplatja
+        `,
+        { type: sequelize.QueryTypes.SELECT })
+        .then(dades => res.json({
+            ok: true,
+            data: dades
+        }))
+        .catch((error) => res.json({ ok: false, error: error }));
+});
 
 router.post("/opinion" ,(req,res) => {
     if (!req.body) {
