@@ -81,12 +81,14 @@ export default class Controller {
 
 
     static postComment = (opinion) => {
-      axios.post(api_mapaPost, opinion)
+     return new Promise((resolve,reject) => axios.post(api_mapaPost, opinion)
       .then((result) => {
           console.log(result);
+          resolve(result)
       }).catch((err) => {
           console.log(err);
-      });
+          reject(err)
+      }));
     }
 
 }

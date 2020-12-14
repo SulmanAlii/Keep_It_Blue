@@ -16,8 +16,9 @@
 }
 
 .logoForma{
-
     border-radius: 50%;
+    height: 6rem;
+    width: 9rem;
 }        
 
 .fa-react {

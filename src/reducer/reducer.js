@@ -8,11 +8,11 @@ const reducer = (state = initialState, action) => {
         case 'get_opinion':
             return {
                 ...state,
-                opinion : state.opiniones.concat([{opinions: action.data}])
+                opiniones: state.opiniones.concat([{data: action.data}])
             }
     
         default:
-            break;
+            return state;
     }
 }
 

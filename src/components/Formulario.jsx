@@ -7,8 +7,6 @@ import '../css/formulario.css'
 //import Puntuador from './Puntuador';
 import {connect} from 'react-redux';
 
-
-
 const InputStyle = styled.input`
   border-radius: 5px;
   border: 1px solid #555;
@@ -26,9 +24,6 @@ const Formulario =  (props) => {
   const [puntuacion, setPuntuacion] = useState("");
   const [idcomarca, setIdcomarca] = useState(props.idcomarca);
   const [nomPlaya, setNomplaya] = useState(props.nomplaya);
-  const [volver, setVolver] = useState();
-  const [active, setActive] = useState(false);
-  const [dataO, setData] = useState([]);
 
 
   // Guardamos la opinion
@@ -45,17 +40,10 @@ const Formulario =  (props) => {
 
    
     Controller.postComment(data)
+    .then(data => {return props.getdata(data)})
+  
+ 
 
-    setData(data)
-    console.log(dataO);
-
-
-    setNombre(' ')
-    setComentario(' ')
-    setFoto(' ')
-    setPuntuacion(' ')
-
-    
   };
 
   const setPuntuacionBtn = (event) => {
@@ -113,10 +101,19 @@ const Formulario =  (props) => {
         <button className="btn btn-success" onClick={() => guardar()}>
          SAVE
         </button>
+    
       </Col>
       : "" }
     </div>
   );
 };
 
-export default Formulario;
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getdata : (dataO) => dispatch({type:'get_opinion', data:dataO})
+  }
+}
+
+
+export default connect(null,mapDispatchToProps)(Formulario);

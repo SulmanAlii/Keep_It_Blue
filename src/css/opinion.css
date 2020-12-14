@@ -1,5 +1,5 @@
 img.opinion_img{
-    width: 23rem;
+    width: 100%;
     height: 16rem;
     object-fit: cover;
     border-radius: 0.2rem;
@@ -7,4 +7,8 @@ img.opinion_img{
 
 .main_container_opinion{
     margin-top: 0.5rem;
+}
+
+ul.nom_platja li{
+    margin-right: 0.5rem;
 }
