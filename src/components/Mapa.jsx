@@ -120,11 +120,11 @@ const Mapa = () => {
     }
       //------------LEYENDA-------------------------------------------------------------
       function getColor(d) {
-        return d >= 5 ? 'green' :
-          d >= 4 ? 'yellow' :
-            d >= 3 ? 'orange' :
-              d >= 2 ? 'red' :
-                d >= 1 ? 'black' :
+        return d > 5 ? 'green' :
+          d > 4 ? 'yellow' :
+            d > 3 ? 'orange' :
+              d > 2 ? 'red' :
+                d > 1 ? 'black' :
                   'blue';
       }
       function leyenda() {
