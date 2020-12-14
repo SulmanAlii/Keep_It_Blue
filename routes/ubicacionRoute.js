@@ -9,7 +9,6 @@ router.get("/ubicacion", async (req,res) => {
     res.json(getUbicacion)
 })
 
-
 router.post("/ubicacion" ,async (req,res) => {
     if(!req.body) res.status(400).json({msg : 'Completa todos los campos'});
 
