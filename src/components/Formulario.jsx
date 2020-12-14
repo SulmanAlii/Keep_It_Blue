@@ -110,7 +110,7 @@ const Formulario =  (props) => {
           />
         </FormGroup>
         <hr />{" "}
-        <button className="btn btn-success" onClick={() => guardar()}>
+        <button className="btn btn-success" onClick={() => {guardar();props.setActive(false);}}>
          SAVE
         </button>
       </Col>
