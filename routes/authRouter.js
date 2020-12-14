@@ -9,7 +9,7 @@ router.get('/', (req,res) => {
     res.send("REGISTER")
 })
 
-
+// Register
 router.post('/' , (req,res) => {
     const name = req.body.nombre;
     const email = req.body.email;
@@ -46,6 +46,11 @@ router.post('/' , (req,res) => {
 
 })
     
+})
+
+
+router.get('/', (req,res) => {
+    const name = req.body
 })
 
 module.exports = router;
