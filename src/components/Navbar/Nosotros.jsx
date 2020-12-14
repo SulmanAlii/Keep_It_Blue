@@ -150,7 +150,7 @@ function QuiSom() {
     return (
         <Fondo>
             <Content>
-                <h2>Equipo CleanBeach </h2>
+                <h2>Equipo Keep it </h2>
                 <h6>Somos un equipo formado por Álex Perez, Eduardo Martinez, Joana Corbella, Sulman Ali y Tomàs Bernaus</h6>
                 <h6>Somos estudiantes del proyecto Enfoca't, cursando un bootcamp de desarroladores web (full stack) impartido por Ricad Hernandez</h6>
             </Content>

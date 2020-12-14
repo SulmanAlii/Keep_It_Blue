@@ -29,7 +29,7 @@ class Navbar extends Component {
         return (
             <BrowserRouter>
                 <nav className="NavbarItems">
-                    <img className="logoForma" src={logo} alt='' width='160px' />
+                    <img className="logoForma" src={logo} alt='Logo' width='160px' />
                     <div className="menu-icon" onClick={this.handleClick}>
                         <i className={this.state.clicked ? 'fa fa-times' : 'fa fa-bars'}></i>
                     </div>
