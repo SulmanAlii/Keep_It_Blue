@@ -2,6 +2,8 @@ const Sequelize = require('sequelize');
 const opinion = require('./models/opinion');
 const comarca = require('./models/comarca');
 const ubicacion = require('./models/ubicacion');
+const user = require('./models/users');
+
 
 
 const sequelize = new Sequelize('mapa','root','MySQLDatabase@1', {
@@ -12,6 +14,7 @@ const sequelize = new Sequelize('mapa','root','MySQLDatabase@1', {
 const opinionTable = opinion(sequelize,Sequelize);
 const comarcaTable = comarca(sequelize,Sequelize);
 const ubicacionTable = ubicacion(sequelize,Sequelize);
+const users = user(sequelize,Sequelize);
 
 sequelize.sync()
 .then((db) => {
@@ -21,4 +24,4 @@ sequelize.sync()
 });
 
 
-module.exports = {sequelize, opinionTable, comarcaTable, ubicacionTable};
+module.exports = {sequelize, opinionTable, comarcaTable, ubicacionTable,users};

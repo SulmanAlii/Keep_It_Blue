@@ -7,6 +7,7 @@ module.exports =   (sequelize,type) => {
         nomplatja : type.STRING,
         idcomarca : type.INTEGER,
         nomcomarca :type.STRING,
+        cp : type.INTEGER,
     
 
     },{tableName: 'opinion', timestamps: false})

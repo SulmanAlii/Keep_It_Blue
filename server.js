@@ -1,6 +1,7 @@
 const express = require('express');
 const {sequelize} = require('./db');
 const cors = require("cors");
+const authRouter = require('./routes/authRouter')
 
 
 const app = express();
@@ -8,7 +9,6 @@ app.use(cors());
 const opinionRoute = require('./routes/opinionRoute')
 const comarcaRoute = require('./routes/ComarcaRoute')
 const ubicacionRoute = require('./routes/ubicacionRoute')
-const cors = require('cors');
 
 
 
@@ -18,6 +18,7 @@ app.use("/",express.static('public'))
 app.use("/" , opinionRoute)
 app.use("/" , comarcaRoute)
 app.use("/" , ubicacionRoute)
+app.use("/signup" , authRouter)
 
 /*
 app.use("/", express.static('front'));

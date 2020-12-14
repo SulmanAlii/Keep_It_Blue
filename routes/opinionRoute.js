@@ -31,6 +31,19 @@ router.get("/opinions", async (req,res) => {
     res.send(getOpinions)
 })
 
+
+router.get("/opinions/:cp", async (req,res) => {
+    
+    const cp = req.params.cp;
+    const getOpinions = await opinionTable.findAll({where:{ cp : cp}})
+    
+    res.send(getOpinions)
+})
+
+
+
+
+
 router.post("/opinion" ,(req,res) => {
     if (!req.body) {
         res.send("Completa todos los datos")
@@ -56,7 +69,7 @@ router.post("/opinion" ,(req,res) => {
         }
 
 
-
+        
         opinionTable.create(newOpinion)
         .then(item => res.json({item}))
         .catch(err => res.json(err));
