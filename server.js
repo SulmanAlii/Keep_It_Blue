@@ -8,7 +8,6 @@ app.use(cors());
 const opinionRoute = require('./routes/opinionRoute')
 const comarcaRoute = require('./routes/ComarcaRoute')
 const ubicacionRoute = require('./routes/ubicacionRoute')
-const cors = require('cors');
 
 
 
