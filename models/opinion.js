@@ -7,9 +7,9 @@ module.exports =   (sequelize,type) => {
         nomplatja : type.STRING,
         idcomarca : type.INTEGER,
         nomcomarca :type.STRING,
-    
+        
 
-    },{tableName: 'opinion', timestamps: false})
+    },{tableName: 'opinion', timestamps: true})
 
 }
 
