@@ -40,6 +40,7 @@ const Linkedin = styled.a`
 color: black;
 `
 
+
 export default function App() {
     return (
         <Router>
@@ -74,6 +75,7 @@ export default function App() {
                 <Route path="/TomasBernaus">
                     <TomasBernaus />
                 </Route>
+                <QuiSom/>
             </Switch>
         </Router>
     );
@@ -139,6 +141,18 @@ function TomasBernaus() {
                 <h6>Formación como Desarrollador web Full Stack en Fundación Esplai (2020), Educador infantil y juvenil (2015), Técnico en sistemas microinformáticos y redes (2015)</h6>
                 <h6>Experiencia como Técnico informatico, responsable de tienda (5-10 empleados) y monitor infantil y juvenil</h6>
                 <Linkedin href="https://www.linkedin.com/in/tomasbernaus/"><p>Contacto por LinkedIn</p></Linkedin>
+            </Content>
+        </Fondo>
+    );
+}
+
+function QuiSom() {
+    return (
+        <Fondo>
+            <Content>
+                <h2>Equipo CleanBeach </h2>
+                <h6>Somos un equipo formado por Álex Perez, Eduardo Martinez, Joana Corbella, Sulman Ali y Tomàs Bernaus</h6>
+                <h6>Somos estudiantes del proyecto Enfoca't, cursando un bootcamp de desarroladores web (full stack) impartido por Ricad Hernandez</h6>
             </Content>
         </Fondo>
     );
