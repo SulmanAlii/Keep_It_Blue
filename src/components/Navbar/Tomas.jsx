@@ -74,6 +74,7 @@ export default function App() {
                 <Route path="/TomasBernaus">
                     <TomasBernaus />
                 </Route>
+            <TomasBernaus/>
             </Switch>
         </Router>
     );

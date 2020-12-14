@@ -7,7 +7,12 @@ import logo from './logo.png';
 import Contacto from './Contacto';
 import Proyecto from './Proyecto';
 import Nosotros from './Nosotros';
-import Totem from './Totem';
+// import Totem from './Totem';
+import Alex from './Alex.jsx';
+import Edu from './Edu.jsx';
+import Joana from './Joana.jsx';
+import Sulman from './Sulman.jsx';
+import Tomas from './Tomas.jsx';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 
@@ -47,7 +52,11 @@ class Navbar extends Component {
                     <Route path="/Contacta" render={() => <Contacto />} />
                     <Route path="/Proyecto" render={() => <Proyecto />} /> 
                     <Route path="/Nosotros" render={() => <Nosotros />} /> 
-                    <Route path="/Totem" render={() => <Totem />} /> 
+                    <Route path="/AlexPerez" render={() => <Alex />} /> 
+                    <Route path="/EduardMartinez" render={() => <Edu />} /> 
+                    <Route path="/JoanaCorbella" render={() => <Joana />} /> 
+                    <Route path="/SulmanAli" render={() => <Sulman />} /> 
+                    <Route path="/TomasBernaus" render={() => <Tomas />} /> 
                     {/* <Route path="/SignUp" render={() => <SignUp />} /> */}
                 </Switch>
             </BrowserRouter>
