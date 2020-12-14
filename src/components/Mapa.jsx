@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON, useMap } from 'react-leaflet';
 import L, { geoJSON } from 'leaflet';
 import { geoData } from './../datos/geo';
-import comarcas from "../datos/polygons.json";
 import { icono, beachOk } from './iconos';
 import { Col, Container,Row } from 'reactstrap';
 import Leaflet from "leaflet";
@@ -15,9 +14,6 @@ import Opinion from './Opinion';
 // Token mapbox
 const mapboxToken = 'pk.eyJ1IjoiYWxwZWxsYW1hcyIsImEiOiJja2kwazVsdm0wMWVnMnVxcWk0eWhmZGpsIn0.QMm5X6pi1TpBK6eHGACpig';
 
-// Array para colorear el fondo de cada municipio (layer)
-const arrayColor = ['green', 'yellow', 'orange', 'red'];
-
 const Mapa = () => {
   // Declaramos el state de playas inicializado null
   const [playasComarca, setPlayasComarca] = useState([]);
@@ -25,13 +21,24 @@ const Mapa = () => {
   const [idcomarca, setidcomarca] = useState();
   const [nomCiudad, setnomCiudad] = useState();
   const [nomPlaya, setplaya] = useState(null);
+  const [puntuaciones, setPuntuaciones] = useState(null);
+
+  //Recibe CP y puntuacion media de la BBDD
+  useEffect(() =>  {
+      fetch("http://localhost:5000/comarca/puntuaciones")
+      .then(data => data.json())
+      .then(scores => setPuntuaciones(scores.data))
+      .catch(err => console.log("ERROR", err))
+  },[])
+  console.log(puntuaciones);
+
 
   let DefaultIcon = Leaflet.icon({
     iconUrl: img,
     iconSize: [40, 40]
   });
-
-  Leaflet.Marker.prototype.options.icon = DefaultIcon;
+  
+  //Leaflet.Marker.prototype.options.icon = DefaultIcon;
 
   function playasFiltradas(layer) {
     // Comparar cp entre comarca y playa y devuelve un array con las playas que pertenecen a la comarca
@@ -42,7 +49,6 @@ const Mapa = () => {
 
   function SetGeoJson() {
     const map = useMap();
-    /* const geojson = L.geoJson(); */
 
     // Estilos predefinidos para los municipios (layer)
     const municipioStyle = {
@@ -51,13 +57,13 @@ const Mapa = () => {
       color: 'black',
       dashArray: 10,
       fillColor: 'blue',
-      fillOpacity: 0.3
+      fillOpacity: 0.5
     }
 
     // Función para el evento click
     const onMunicipioClick = (event) => {
       const layer = event.target;
-      //console.log(layer);
+      console.log(layer);
       map.fitBounds(layer.getBounds());
       setPlayasComarca(playasFiltradas(layer));
 
@@ -95,9 +101,16 @@ const Mapa = () => {
       layer.bindPopup(nameMunicipio);
 
       // Creamos una constante aleatoria para definir el color del municipio en función del array de colores
-      const indexColor = Math.floor(Math.random() * arrayColor.length);
-      layer.options.fillColor = arrayColor[indexColor];
+      //const indexColor = Math.floor(Math.random() * arrayColor.length);
 
+      //Recorremos array que viene de la BBDD para hacer match con el CP de este municipio
+      puntuaciones.forEach(element => {
+        if(element.cp == municipio.properties.codigo_postal){
+          const redondeado = Math.round(element['AVG(puntuacion)']*1);
+          layer.options.fillColor = getColor(redondeado);
+        }
+      });  
+      
       // Eventos
       layer.on({
         click: onMunicipioClick,
@@ -107,11 +120,11 @@ const Mapa = () => {
     }
       //------------LEYENDA-------------------------------------------------------------
       function getColor(d) {
-        return d > 5 ? 'green' :
-          d > 4 ? 'yellow' :
-            d > 3 ? 'orange' :
-              d > 2 ? 'red' :
-                d > 1 ? 'black' :
+        return d >= 5 ? 'green' :
+          d >= 4 ? 'yellow' :
+            d >= 3 ? 'orange' :
+              d >= 2 ? 'red' :
+                d >= 1 ? 'black' :
                   'blue';
       }
   
@@ -132,12 +145,19 @@ const Mapa = () => {
       };
         legend.addTo(map);
     //=========================================================================================
-
-    return (
-        <GeoJSON data={geoData} style={municipioStyle} onEachFeature={onEachMunicipio} />
-
-    );
+      if(puntuaciones){
+        return (
+          <GeoJSON data={geoData} style={municipioStyle} onEachFeature={onEachMunicipio} />
+        );
+      }else{
+        return (
+          <h3>Cargando...</h3>
+        )
+      }
+      
+    
   }
+
   //Activa el formulario
   const addtoform = (nomPlaya,idcomarca,nomCiudad) => {
     setplaya(nomPlaya);
@@ -149,20 +169,17 @@ const Mapa = () => {
 
   // Muestra las playas
   const playas = playasComarca.map((playa, idx) => (
-    <Marker key={idx} position={[playa["-l"], playa["-o"]]} >
+    <Marker key={idx} position={[playa["-l"], playa["-o"]]} icon={DefaultIcon} >
       <Popup>
         {playa["-t"]}
         <i class="fa fa-plus" aria-hidden="true" onClick={() => addtoform(playa["-t"],playa["-i"],playa.m["-t"])} ></i>
       </Popup>
     </Marker>
-  ));
-
-  
+  )); 
 
   const selectplaya = playasComarca.map((el, idx) => (
     <option key={idx} value={el["-t"]}>{el["-t"]}</option>
   ));
-
 
   return (
     <Container fluid>
