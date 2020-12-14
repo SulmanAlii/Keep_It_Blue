@@ -164,19 +164,19 @@ const Mapa = () => {
 
   
 
-  const selectplaya = playasComarca.map((el, idx) => (
+/*   const selectplaya = playasComarca.map((el, idx) => (
     <option key={idx} value={el["-t"]}>{el["-t"]}</option>
-  ));
+  )); */
 
 
   return (
     <Container>
       <Row>
       <Col xs={active ? "7" : "12"} >
-        <select className="custom-select" id="inputGroupSelect01">
+        {/* <select className="custom-select" id="inputGroupSelect01">
           <option value="" selected>Escoge la playa ...</option>
           {selectplaya}
-        </select>
+        </select> */}
         <MapContainer style={{ height: '75vh' }} center={[41.392264, 2.202652]} zoom={10} scrollWheelZoom={true}>
           <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
