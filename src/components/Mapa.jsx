@@ -3,17 +3,22 @@ import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup, GeoJSON, useMap } from 'react-leaflet';
 import L, { geoJSON } from 'leaflet';
 import { geoData } from './../datos/geo';
-import { icono, beachOk } from './iconos';
+import { beachOk } from './iconos';
 import { Col, Container,Row } from 'reactstrap';
 import Leaflet from "leaflet";
 import img from '../tree.png';
 import Formulario from './Formulario';
 import Opinion from './Opinion';
+import Palmera4 from "../img/Palmera4.png";
+import Palmera3 from "../img/Palmera3.png";
+import Palmera2 from "../img/Palmera2.png";
+import Palmera1 from "../img/Palmera1.png";
+import Palmera5 from "../img/Palmera5.png";
 
 
 // Token mapbox
 const mapboxToken = 'pk.eyJ1IjoiYWxwZWxsYW1hcyIsImEiOiJja2kwazVsdm0wMWVnMnVxcWk0eWhmZGpsIn0.QMm5X6pi1TpBK6eHGACpig';
-
+const palmeras= [0,Palmera1,Palmera2,Palmera3,Palmera4,Palmera5]
 const Mapa = () => {
   // Declaramos el state de playas inicializado null
   const [playasComarca, setPlayasComarca] = useState([]);
@@ -22,21 +27,29 @@ const Mapa = () => {
   const [nomCiudad, setnomCiudad] = useState();
   const [nomPlaya, setplaya] = useState(null);
   const [puntuaciones, setPuntuaciones] = useState(null);
+  const [puntuacionesPlayas, setPuntuacionesPlayas] = useState(null);
 
   //Recibe CP y puntuacion media de la BBDD
   useEffect(() =>  {
       fetch("http://localhost:5000/comarca/puntuaciones")
       .then(data => data.json())
       .then(scores => setPuntuaciones(scores.data))
-      .catch(err => console.log("ERROR", err))
+      .catch(err => console.log("ERROR", err));
+
+      fetch("http://localhost:5000/opinion/puntuaciones")
+      .then(data => data.json())
+      .then(scores => setPuntuacionesPlayas(scores.data))
+      .catch(err => console.log("ERROR", err));      
+
   },[])
-  console.log(puntuaciones);
 
+  //console.log(puntuaciones);
+  //console.log(puntuacionesPlayas);
 
-  let DefaultIcon = Leaflet.icon({
+  /* let DefaultIcon = Leaflet.icon({
     iconUrl: img,
     iconSize: [40, 40]
-  });
+  }); */
   
   //Leaflet.Marker.prototype.options.icon = DefaultIcon;
 
@@ -63,7 +76,7 @@ const Mapa = () => {
     // Función para el evento click
     const onMunicipioClick = (event) => {
       const layer = event.target;
-      console.log(layer);
+      //console.log(layer);
       map.fitBounds(layer.getBounds());
       setPlayasComarca(playasFiltradas(layer));
 
@@ -120,11 +133,11 @@ const Mapa = () => {
     }
       //------------LEYENDA-------------------------------------------------------------
       function getColor(d) {
-        return d > 5 ? 'green' :
-          d > 4 ? 'yellow' :
-            d > 3 ? 'orange' :
-              d > 2 ? 'red' :
-                d > 1 ? 'black' :
+        return d > 4 ? 'green' :
+          d > 3 ? 'yellow' :
+            d > 2 ? 'orange' :
+              d > 1 ? 'red' :
+                d > 0 ? 'black' :
                   'blue';
       }
       function leyenda() {
@@ -132,10 +145,10 @@ const Mapa = () => {
   
         legend.onAdd = function (map) {
           const div = L.DomUtil.create('div.leg', 'info legend'),
-            grades = [0, 1, 2, 3, 4, 5];
+            grades = [1, 2, 3, 4, 5];
           for (let i = 0; i < grades.length; i++) {
             div.innerHTML +=
-            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            '<i style="background:' + getColor(grades[i]) + '"></i> ' +
             grades[i] + '<br>';
           }
     
@@ -173,9 +186,32 @@ const Mapa = () => {
     setActive(true);
   };
 
+  function icono(nomplatja){
+    //console.log(puntuacionesPlayas);
+    //console.log(nomplatja);
+    const palmera = puntuacionesPlayas.find(element => element.nomplatja == nomplatja);
+    let Icon;
+    if(palmera){
+
+     const pozo = Math.round(palmera["AVG(puntuacion)"]);
+
+      Icon = Leaflet.icon({
+        iconUrl: palmeras[pozo],
+        iconSize: [40, 40]
+      });
+    }else{
+      Icon = Leaflet.icon({
+        iconUrl: Palmera5,
+        iconSize: [40, 40]
+      });
+    }
+    return Icon;
+  }
+  
   // Muestra las playas
   const playas = playasComarca.map((playa, idx) => (
-    <Marker key={idx} position={[playa["-l"], playa["-o"]]} icon={DefaultIcon} >
+    
+    <Marker key={idx} position={[playa["-l"], playa["-o"]]} icon={icono(playa["-t"])} >
       <Popup>
         {playa["-t"]}
         <i class="fa fa-plus" aria-hidden="true" onClick={() => addtoform(playa["-t"],playa["-i"],playa.m["-t"])} ></i>
