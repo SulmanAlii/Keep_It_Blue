@@ -39,6 +39,9 @@ border-radius: 5px;
 const Linkedin = styled.a`
 color: black;
 `
+const Text = styled.h2`
+text-align: center;
+`
 
 export default function App() {
     return (
@@ -84,7 +87,7 @@ function AlexPerez() {
     return (
         <Fondo>
             <Content>
-                <h2>Álex Perez</h2>
+                <Text>Álex Perez</Text>
                 <h6>Formación como Desarrollador web Full Stack en Fundación Esplai (2020), Técnico superior en Desarrollo de aplicaciones web (2017), Técnico superior en administración de sistemas informáticos y redes (2016), Técnico en sistemas microinformáticos y redes(2014)</h6>
                 <h6>Experiencia en administración de sistemas y desarrollador web</h6>
                 <Linkedin href="https://www.linkedin.com/in/alex-perez-llamas/"><p>Contacto por LinkedIn</p></Linkedin>
@@ -97,7 +100,7 @@ function EduardMartinez() {
     return (
         <Fondo>
             <Content>
-                <h2>Eduard Martinez</h2>
+                <Text>Eduard Martinez</Text>
                 <h6>Formación como Desarrollador web Full Stack en Fundación Esplai (2020), técnico superior en desarrollo de aplicaciones web (2016) Estudió en Stucom </h6>
                 <h6>Experiencia como desarrollador de aplicaciones web, programador en carver y educador infantil y juvenil</h6>
                 <Linkedin href="https://www.linkedin.com/in/eduard-martinez-rama-240a73123/"><p>Contato por LinkedIn</p></Linkedin>
@@ -110,7 +113,7 @@ function JoanaCorbella() {
     return (
         <Fondo>
             <Content>
-                <h2>Joana Corbella</h2>
+                <Text>Joana Corbella</Text>
                 <h6>Formación como Desarrolladora web Full Stack en Fundación Esplai (2020), Graduada en Traducción e Interpretación (Inglés/Alemán/Catalán/Castellano) en Universitat Pompeu Fabra (2018)</h6>
                 <h6>Experiencia como Traductora técnica y profesora de alemán e inglés</h6>
                 <Linkedin href="https://www.linkedin.com/in/joana-corbella-ruiz-515b1a177/"><p>Contacto por LinkedIn</p></Linkedin>
@@ -123,7 +126,7 @@ function SulmanAli() {
     return (
         <Fondo>
             <Content>
-                <h2>Sulman Ali</h2>
+                <Text>Sulman Ali</Text>
                 <h6>Formación como Desarrollador web Full Stack en Fundación Esplai (2020), Técnico superior en Desarrollo de aplicaciones multiplataforma</h6>
                 <h6>Experiencia como desarrollador web</h6>
                 <Linkedin href="https://www.linkedin.com/in/sulman-ali-54bb211b2/"><p>Contacto por LinkedIn</p></Linkedin>
@@ -136,7 +139,7 @@ function TomasBernaus() {
     return (
         <Fondo>
             <Content>
-                <h2>Tomàs Bernaus</h2>
+                <Text>Tomàs Bernaus</Text>
                 <h6>Formación como Desarrollador web Full Stack en Fundación Esplai (2020), Educador infantil y juvenil (2015), Técnico en sistemas microinformáticos y redes (2015)</h6>
                 <h6>Experiencia como Técnico informatico, responsable de tienda (5-10 empleados) y monitor infantil y juvenil</h6>
                 <Linkedin href="https://www.linkedin.com/in/tomasbernaus/"><p>Contacto por LinkedIn</p></Linkedin>

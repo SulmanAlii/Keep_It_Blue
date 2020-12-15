@@ -13,6 +13,7 @@ import Edu from './Edu.jsx';
 import Joana from './Joana.jsx';
 import Sulman from './Sulman.jsx';
 import Tomas from './Tomas.jsx';
+import NotFound from "./P404";
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 
@@ -50,13 +51,14 @@ class Navbar extends Component {
                 <Switch>
                     <Route exact path="/" render={() => <Mapa />} />
                     <Route path="/Contacta" render={() => <Contacto />} />
-                    <Route path="/Proyecto" render={() => <Proyecto />} /> 
-                    <Route path="/Nosotros" render={() => <Nosotros />} /> 
-                    <Route path="/AlexPerez" render={() => <Alex />} /> 
-                    <Route path="/EduardMartinez" render={() => <Edu />} /> 
-                    <Route path="/JoanaCorbella" render={() => <Joana />} /> 
-                    <Route path="/SulmanAli" render={() => <Sulman />} /> 
-                    <Route path="/TomasBernaus" render={() => <Tomas />} /> 
+                    <Route path="/Proyecto" render={() => <Proyecto />} />
+                    <Route path="/Nosotros" render={() => <Nosotros />} />
+                    <Route path="/AlexPerez" render={() => <Alex />} />
+                    <Route path="/EduardMartinez" render={() => <Edu />} />
+                    <Route path="/JoanaCorbella" render={() => <Joana />} />
+                    <Route path="/SulmanAli" render={() => <Sulman />} />
+                    <Route path="/TomasBernaus" render={() => <Tomas />} />
+                    <Route component={NotFound} />
                     {/* <Route path="/SignUp" render={() => <SignUp />} /> */}
                 </Switch>
             </BrowserRouter>
