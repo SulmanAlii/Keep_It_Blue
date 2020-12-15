@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
 import styled from "styled-components";
+
 const EspaiV = styled.div`
   height: ${({ alt }) => alt || "50px"};
 `;
@@ -16,6 +17,9 @@ const Items = () => {
       setQui("");
       setOn("");
       alert("Gracias por tu mensaje");
+    }
+    else {
+      alert("El campo Comentario no puede estar vacío");
     }
   }
 
