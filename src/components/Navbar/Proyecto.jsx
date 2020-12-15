@@ -23,30 +23,32 @@ const Proyecto = () => {
     border-bot:5px;
     border-radius: 5px; 
     `
+	
     return (
         <>
             <Estilo>
                 <Font>
 
                     <h1>Proyecto</h1>
+
                     <video controls width="400" height="400" margin="5px"
-                         loop muted
+                        loop muted
                         Poster="Poster.png">
                         <source src="playa1.webm" type="video/webm" />
                         <p>Su navegador no soporta video HTML5, pulse
                         <a href="playa1.webm">este enlace</a>
                         para descargarlo.</p>
                     </video>
-                  
+
                     <video controls width="400" height="400"
-                         loop muted
+                        loop muted
                         Poster="Poster.png">
                         <source src="playa2.mp4" type="video/mp4" />
                         <source src="playa2.webm" type="video/webm" />
                         <p>Su navegador no soporta video HTML5, pulse
                         <a href="playa2.webm">este enlace</a>
                         para descargarlo.</p>
-                    </video>
+                    </video> 
 
                     <h1></h1>
 
@@ -57,7 +59,7 @@ const Proyecto = () => {
                             <tr>
                                 <th>
                                     El proyecto es expansible a
-                                    la lipieza y mantenimiento de
+                                    la limpieza y mantenimiento de
                                 </th>
                             </tr>
                         </thead>
