@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const api_url = 'http://localhost:3000/contactos';
 const api_mapaPost = 'http://localhost:5000/opinion'
+const api_mapaEvento = 'http://localhost:5000/evento';
 
 export default class Controller {
 
@@ -91,5 +92,17 @@ export default class Controller {
       }));
     }
 
+
+    static postEvent = (event) => {
+        return new Promise((resolve,reject) => axios.post(api_mapaEvento, event)
+         .then((result) => {
+             console.log(result);
+             resolve(result)
+         }).catch((err) => {
+             console.log(err);
+             reject(err)
+         }));
+       }
+   
 }
 

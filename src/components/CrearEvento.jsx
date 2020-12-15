@@ -47,16 +47,13 @@ const CrearEvento = (props) => {
     data.append("nomcomarca", municipi);
 
 
-    Controller.postComment(data)
+    Controller.postEvent(data)
 
     setData(data)
     console.log(dataO);
 
 
-    setNombreEvento(' ')
-    setNombrePersona(' ')
-    setFoto(' ')
-    setDescripcion(' ')
+    
 
 
   };
@@ -64,6 +61,7 @@ const CrearEvento = (props) => {
 
   return (
     <div className="form">
+    
       {props.active ?
         <Col xs="12" className="form" >
           <br />
@@ -100,7 +98,7 @@ const CrearEvento = (props) => {
 
           <FormGroup>
             <h5 for="descripcipn">Tipo de evento</h5>
-            <Input type="date" name="tipoEvent" id="comentario" value={tipoEvent} onChange={(e) => setTipoEvent(e.target.value)} />
+            <Input type="text" name="tipoEvent" id="comentario" value={tipoEvent} onChange={(e) => setTipoEvent(e.target.value)} />
           </FormGroup>
 
           <FormGroup>

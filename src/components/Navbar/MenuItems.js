@@ -21,7 +21,7 @@ export const MenuItems = [
     },
     {
         title: 'Crear Evento',
-        url: 'crear-evento',
+        url: 'crearEvento',
         cName: 'nav-links'
     },
     {

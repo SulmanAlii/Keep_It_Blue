@@ -17,6 +17,7 @@ import Joana from "./Joana.jsx";
 import Sulman from "./Sulman.jsx";
 import Tomas from "./Tomas.jsx";
 import NotFound from "./P404";
+import EventoMapa from "../EventoMapa";
 
 const tokenn = JSON.parse(localStorage.getItem("token"));
 
@@ -104,7 +105,7 @@ class Navbar extends React.Component {
           <Route path="/JoanaCorbella" render={() => <Joana />} />
           <Route path="/SulmanAli" render={() => <Sulman />} />
           <Route path="/TomasBernaus" render={() => <Tomas />} />
-          <Route path="/crear-evento" render={() => <CrearEvento />} />
+          <Route path="/crearEvento" render={() => <EventoMapa />} />
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>

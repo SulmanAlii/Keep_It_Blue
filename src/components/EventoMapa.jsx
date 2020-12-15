@@ -14,12 +14,13 @@ import Palmera3 from "../img/Palmera3.png";
 import Palmera2 from "../img/Palmera2.png";
 import Palmera1 from "../img/Palmera1.png";
 import Palmera5 from "../img/Palmera5.png";
+import CrearEvento from "./CrearEvento";
 
 
 // Token mapbox
 const mapboxToken = 'pk.eyJ1IjoiYWxwZWxsYW1hcyIsImEiOiJja2kwazVsdm0wMWVnMnVxcWk0eWhmZGpsIn0.QMm5X6pi1TpBK6eHGACpig';
 const palmeras= [0,Palmera1,Palmera2,Palmera3,Palmera4,Palmera5]
-const Mapa = () => {
+const EventoMapa = () => {
   // Declaramos el state de playas inicializado null
   const [playasComarca, setPlayasComarca] = useState([]);
   const [active, setActive] = useState(false);
@@ -240,12 +241,11 @@ const Mapa = () => {
           {playas}
           <SetGeoJson />
         </MapContainer>
-      </Col >
+      </Col>
       <Col>
-        {active ? <Formulario nomplaya={nomPlaya}  idcomarca={idcomarca} nomMunicipi={nomCiudad} active={active} setActive={setActive}/> : ""}
+        {active ? <CrearEvento nomplaya={nomPlaya}  idcomarca={idcomarca} nomMunicipi={nomCiudad} active={active} setActive={setActive}/> : ""}
       </Col>
       </Row>
-      <Opinion />
     </Container>
 
   );
