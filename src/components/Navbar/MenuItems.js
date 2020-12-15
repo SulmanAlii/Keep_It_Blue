@@ -20,14 +20,13 @@ export const MenuItems = [
         cName: 'nav-links'
     },
     {
-        title: 'Totem',
-        url: 'Totem',
+        title: 'Crear Evento',
+        url: 'crear-evento',
         cName: 'nav-links'
     },
-
     {
-        title: 'Registrarse',
-        url: '#',
+        title: 'Registrate',
+        url: 'login',
         cName: 'nav-links-mobile'
     }
 
