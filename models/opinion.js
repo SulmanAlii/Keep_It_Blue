@@ -10,7 +10,7 @@ module.exports =   (sequelize,type) => {
         cp : type.INTEGER,
     
 
-    },{tableName: 'opinion', timestamps: false})
+    },{tableName: 'opinion', timestamps: true})
 
 }
 

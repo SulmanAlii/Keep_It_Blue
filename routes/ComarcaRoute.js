@@ -1,13 +1,28 @@
 const express = require('express');
-const {comarcaTable}  = require('../db')
+const {sequelize,comarcaTable}  = require('../db')
 const router = express.Router();
-
 
 router.get("/comarca", async (req,res) => {
     const getComarca = await comarcaTable.findAll()
     res.json(getComarca)
 })
 
+// Query RAW Ricard
+router.get('/comarca/puntuaciones', function (req, res, next) {
+    sequelize.query(
+        `
+        SELECT c.cp ,AVG(puntuacion) 
+        FROM opinion as o INNER JOIN comarca2 as c
+        ON o.idcomarca = c.id
+        GROUP BY c.cp
+        `,
+        { type: sequelize.QueryTypes.SELECT })
+        .then(dades => res.json({
+            ok: true,
+            data: dades
+        }))
+        .catch((error) => res.json({ ok: false, error: error }));
+});
 
 router.post("/comarca", async (req,res) => {
     

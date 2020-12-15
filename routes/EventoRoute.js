@@ -1,10 +1,9 @@
 const express = require('express');
-const {sequelize,opinionTable}  = require('../db');
+
 const router = express.Router();
-
 const multer = require('multer');
-const opinion = require('../models/opinion');
-
+const evento = require('../models/evento');
+const {sequelize,eventoTable}  = require('../db');
 
 //multer es un plugin que facilita la lectura de archivos procedentes de forms
 //aquí se inicializa, indicando que la carpeta es 'uploads'
@@ -21,29 +20,16 @@ const upload = multer({ storage: storage }).single('file');
 
 
 
-router.get("/", async (req,res) => {
+router.get("/", async (req, res) => {
     res.send('WELCOME')
 })
 
-router.get("/opinions", async (req,res) => {
-    const getOpinions = await opinionTable.findAll()
-    res.send(getOpinions)
+router.get("/evento", async (req, res) => {
+    const getEventos = await eventosTable.findAll()
+    res.send(getEventos)
 })
 
-
-router.get("/opinions/:cp", async (req,res) => {
-    
-    const cp = req.params.cp;
-    const getOpinions = await opinionTable.findAll({where:{ cp : cp}})
-    
-    res.send(getOpinions)
-})
-
-
-
-
-
-router.post("/opinion" ,(req,res) => {
+router.post("/evento", (req, res) => {
     if (!req.body) {
         res.send("Completa todos los datos")
     }
@@ -56,22 +42,22 @@ router.post("/opinion" ,(req,res) => {
         }
 
 
-        const newOpinion = {
-            nombre: req.body.nombre,
-            opinion: req.body.opinion,
+        const newEvento = {
+            nomEvent: req.body.nomEvent,
+            nomPersona: req.body.nomPersona,
+            descripcioEvent: req.body.descripcioEvent,
+            tipoEvent: req.body.tipoEvent,
             foto: req.file.filename,
-            puntuacion : req.body.puntuacion,
             nomplatja : req.body.nomplatja,
-            idcomarca: req.body.idcomarca,
-            nomcomarca : req.body.nomcomarca
-            
+            idcomarca : req.body.idcomarca,
+            nomcomarca :req.body.nomcomarca,
         }
 
 
-        
-        opinionTable.create(newOpinion)
-        .then(item => res.json({item}))
-        .catch(err => res.json(err));
+
+        eventoTable.create(newEvento)
+            .then(item => res.json({ item }))
+            .catch(err => res.json(err));
     })
 })
 
