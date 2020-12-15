@@ -26,7 +26,7 @@ class Navbar extends Component {
             <BrowserRouter>
                 <nav className="NavbarItems">
                     <h1 className="navbar-logo">
-                        <img className="logoForma" src={KeepItBlue} alt='' width='110px'></img>
+                        <img className="logoForma" src={KeepItBlue} alt='Keep It Blue Logo' width='110px'></img>
                         <i className=""></i> </h1>
                     <div className="menu-icon" onClick={this.handleClick}>
                         <i className={this.state.clicked ? 'fa fa-times' : 'fa fa-bars'}></i>
@@ -46,16 +46,16 @@ class Navbar extends Component {
                 </nav>
                 <br />
                 <Switch>
-                    <Route exact path="/" render={() => <Mapa />} />
-                    <Route path="/Contacta" render={() => <Contacto />} />
-                    <Route path="/Proyecto" render={() => <Proyecto />} />
-                    <Route path="/Nosotros" render={() => <Nosotros />} />
-                    <Route path="/AlexPerez" render={() => <Alex />} />
-                    <Route path="/EduardMartinez" render={() => <Edu />} />
-                    <Route path="/JoanaCorbella" render={() => <Joana />} />
-                    <Route path="/SulmanAli" render={() => <Sulman />} />
-                    <Route path="/TomasBernaus" render={() => <Tomas />} />
-                    <Route path="/crear-evento" render={() => <CrearEvento />} />
+                    <Route exact path="/" render={() => <Mapa/>} />
+                    <Route path="/Contacta" render={() => <Contacto/>} />
+                    <Route path="/Proyecto" render={() => <Proyecto/>} />
+                    <Route path="/Nosotros" render={() => <Nosotros/>} />
+                    <Route path="/AlexPerez" render={() => <Alex/>} />
+                    <Route path="/EduardMartinez" render={() => <Edu/>} />
+                    <Route path="/JoanaCorbella" render={() => <Joana/>} />
+                    <Route path="/SulmanAli" render={() => <Sulman/>} />
+                    <Route path="/TomasBernaus" render={() => <Tomas/>} />
+                    <Route path="/crear-evento" render={() => <CrearEvento/>} />
                     <Route component={NotFound} />
                 </Switch>
             </BrowserRouter>
