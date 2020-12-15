@@ -21,7 +21,7 @@ app.use("/" , comarcaRoute)
 app.use("/" , ubicacionRoute)
 app.use("/" , authRouter)
 app.use("/" , eventoRoute)
-
+app.use('/' , express.static('public'))
 
 /*
 app.use("/", express.static('front'));

@@ -1,0 +1,39 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a98664a2.chunk.css",
+    "main.js": "/static/js/main.f5b7521f.chunk.js",
+    "main.js.map": "/static/js/main.f5b7521f.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.607d8903.js",
+    "runtime-main.js.map": "/static/js/runtime-main.607d8903.js.map",
+    "static/css/2.d5972c72.chunk.css": "/static/css/2.d5972c72.chunk.css",
+    "static/js/2.22d79be5.chunk.js": "/static/js/2.22d79be5.chunk.js",
+    "static/js/2.22d79be5.chunk.js.map": "/static/js/2.22d79be5.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.d5972c72.chunk.css.map": "/static/css/2.d5972c72.chunk.css.map",
+    "static/css/main.a98664a2.chunk.css.map": "/static/css/main.a98664a2.chunk.css.map",
+    "static/js/2.22d79be5.chunk.js.LICENSE.txt": "/static/js/2.22d79be5.chunk.js.LICENSE.txt",
+    "static/media/Green.68b9c412.png": "/static/media/Green.68b9c412.png",
+    "static/media/KeepItBlue.74b6c32b.png": "/static/media/KeepItBlue.74b6c32b.png",
+    "static/media/Palmera1.2c67a5f1.png": "/static/media/Palmera1.2c67a5f1.png",
+    "static/media/Palmera2.9f272d39.png": "/static/media/Palmera2.9f272d39.png",
+    "static/media/Palmera3.468e95b1.png": "/static/media/Palmera3.468e95b1.png",
+    "static/media/Palmera4.72940db9.png": "/static/media/Palmera4.72940db9.png",
+    "static/media/Palmera5.053428db.png": "/static/media/Palmera5.053428db.png",
+    "static/media/Poster.0f7b293c.png": "/static/media/Poster.0f7b293c.png",
+    "static/media/Real.f69fd059.png": "/static/media/Real.f69fd059.png",
+    "static/media/Running.ff1693ce.png": "/static/media/Running.ff1693ce.png",
+    "static/media/White.c8eccc12.png": "/static/media/White.c8eccc12.png",
+    "static/media/contacto.css": "/static/media/mar.f9e4b8bf.jpeg",
+    "static/media/playa1.c5253df9.mp4": "/static/media/playa1.c5253df9.mp4",
+    "static/media/playa2.733c6ecd.mp4": "/static/media/playa2.733c6ecd.mp4",
+    "static/media/App.css": "/static/media/sea3.29d69dd2.jpg",
+    "static/media/tree.3584c100.png": "/static/media/tree.3584c100.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.607d8903.js",
+    "static/css/2.d5972c72.chunk.css",
+    "static/js/2.22d79be5.chunk.js",
+    "static/css/main.a98664a2.chunk.css",
+    "static/js/main.f5b7521f.chunk.js"
+  ]
+}

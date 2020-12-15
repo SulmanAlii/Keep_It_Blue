@@ -8,10 +8,15 @@ const evento = require('./models/evento')
 
 
 
-const sequelize = new Sequelize('mapa','root','MySQLDatabase@1', {
-    host : 'localhost',
+const sequelize = new Sequelize('c1kvn8eus4qw17m0','a3w168m4v7cwuwlo','bvjrcjjyoma3dem8', {
+    host : 'cvktne7b4wbj4ks1.chr7pe7iynqr.eu-west-1.rds.amazonaws.com',
     dialect: 'mysql'
 })
+
+// const sequelize = new Sequelize('mapa','root','MySQLDatabase@1', {
+//     host : 'localhost',
+//     dialect: 'mysql'
+// })
 
 const opinionTable = opinion(sequelize,Sequelize);
 const comarcaTable = comarca(sequelize,Sequelize);
