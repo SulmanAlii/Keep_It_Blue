@@ -55,8 +55,6 @@ router.get('/opinion/puntuaciones', function (req, res, next) {
         .catch((error) => res.json({ ok: false, error: error }));
 });
 
-
-
 router.post("/opinion" ,(req,res) => {
     if (!req.body) {
         res.send("Completa todos los datos")
