@@ -4,8 +4,7 @@ import styled from "styled-components";
 import Controller from "./FormularioController";
 import '../mapa.css';
 import '../css/formulario.css'
-//import Puntuador from './Puntuador';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 
 
@@ -18,14 +17,16 @@ const InputStyle = styled.input`
   background-color: white;
 `; //ubicacion_idubicacion
 
-const CrearEvento =  (props) => {
-  const [nombre, setNombre] = useState("");
-  const [municipi, setMunicipio] = useState(props.nomMunicipi);
-  const [comentario, setComentario] = useState("");
+const CrearEvento = (props) => {
+  const [nombreEvento, setNombreEvento] = useState("");
+  const [nombrePersona, setNombrePersona] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [fecha, setFecha] = useState("");
+  const [tipoEvent, setTipoEvent] = useState();
   const [foto, setFoto] = useState();
-  const [puntuacion, setPuntuacion] = useState("");
-  const [idcomarca, setIdcomarca] = useState(props.idcomarca);
   const [nomPlaya, setNomplaya] = useState(props.nomplaya);
+  const [idcomarca, setIdcomarca] = useState(props.idcomarca);
+  const [municipi, setMunicipi] = useState(props.nomMunicipi);
   const [volver, setVolver] = useState();
   const [active, setActive] = useState(false);
   const [dataO, setData] = useState([]);
@@ -35,86 +36,84 @@ const CrearEvento =  (props) => {
   const guardar = () => {
 
     const data = new FormData();
-    data.append("nombre", nombre);
-    data.append("opinion", comentario);
+    data.append("nomEvent", nombreEvento);
+    data.append("nomPersona", nombrePersona);
+    data.append("descripcioEvent", descripcion);
+    data.append("data", fecha);
+    data.append("tipoEvent", tipoEvent);
     data.append("file", foto);
-    data.append("puntuacion", puntuacion);
     data.append("nomplatja", nomPlaya);
     data.append("idcomarca", idcomarca);
     data.append("nomcomarca", municipi);
 
-   
+
     Controller.postComment(data)
 
     setData(data)
     console.log(dataO);
 
 
-    setNombre(' ')
-    setComentario(' ')
+    setNombreEvento(' ')
+    setNombrePersona(' ')
     setFoto(' ')
-    setPuntuacion(' ')
+    setDescripcion(' ')
 
-    
+
   };
-
-  const setPuntuacionBtn = (event) => {
-    setPuntuacion(event)
-  }
 
 
   return (
     <div className="form">
-    {props.active ? 
-      <Col xs="12" className="form" >
-        <br />
-        <div style={{ display: "flex", justifyContent: "space-between", width: "100%",}}>
-          <h3 style={{ width: "16rem" }}>Playa {props.nomplaya}</h3>
-          <Button onClick={() => props.setActive(false)}>X</Button>
-        </div>
-        <hr />
-        <FormGroup>
-          <h5 for="nom">Nombre</h5>
-          <InputStyle type="text" name="nom" id="nom" value={nombre} onChange={(e) => setNombre(e.target.value)}/>
-        </FormGroup>
+      {props.active ?
+        <Col xs="12" className="form" >
+          <br />
+          <div style={{ display: "flex", justifyContent: "space-between", width: "100%", }}>
+            <h3 style={{ width: "16rem" }}>Playa {props.nomplaya}</h3>
+            <Button onClick={() => props.setActive(false)}>X</Button>
+          </div>
+          <hr />
+          <FormGroup>
+            <h5 for="nomEvent">Nombre evento</h5>
+            <InputStyle type="text" name="nom" id="nom" value={nombreEvento} onChange={(e) => setNombreEvento(e.target.value)} />
+          </FormGroup>
 
-        <FormGroup>
-        <h5 for="nom">Municipio</h5>
-        <InputStyle type="text" name="municipi" id="municipi" value={props.nomMunicipi.substring(5, props.nomMunicipi.length)} onChange={(e) => setMunicipio(e.target.value)}/>
-      </FormGroup>
-        <FormGroup>
-          <h5 for="comentario">Comentario</h5>
-          <Input type="textarea" name="comentario" id="comentario" value={comentario} onChange={(e) => setComentario(e.target.value)}/> 
-        </FormGroup>
-        <h5 for="puntuacion">Puntuacion</h5>
-        <div style={{ width: "9rem" }} className="puntuacionEstrellas" id="puntuacionEstrellas" value={puntuacion} >
-              <div>
-              <input type="radio" value="5" name="rate" id="rate-5" onChange={(e) => setPuntuacionBtn(e.target.value)}/>
-              <label for="rate-5" className="fa fa-star-o"></label>
-              <input type="radio" value="4" name="rate" id="rate-4" onChange={(e) => setPuntuacionBtn(e.target.value)}/>
-              <label for="rate-4" className="fa fa-star-o"></label>
-              <input type="radio" value="3" name="rate" id="rate-3" onChange={(e) => setPuntuacionBtn(e.target.value)}/>
-              <label for="rate-3" className="fa fa-star-o"></label>
-              <input type="radio" value="2" name="rate" id="rate-2" onChange={(e) => setPuntuacionBtn(e.target.value)}/>
-              <label for="rate-2" className="fa fa-star-o"></label>
-              <input type="radio" value="1" name="rate" id="rate-1" onChange={(e) => setPuntuacionBtn(e.target.value)}/>
-              <label for="rate-1" className="fa fa-star-o"></label>
-              <form action="#">
-                  <header></header>
-              </form>
-              </div>
-        </div>
-        <FormGroup>
-          <h5 for="foto">Imagen</h5>
-          <InputStyle type="file"  onChange={(e) => setFoto(e.target.files[0])}
-          />
-        </FormGroup>
-        <hr />{" "}
-        <button className="btn btn-success" onClick={() => guardar()}>
-         SAVE
+          <FormGroup>
+            <h5 for="nom">Nombre</h5>
+            <InputStyle type="text" name="nom" id="nom" value={nombrePersona} onChange={(e) => setNombrePersona(e.target.value)} />
+          </FormGroup>
+
+          <FormGroup>
+            <h5 for="nom">Municipio</h5>
+            <InputStyle type="text" name="municipi" id="municipi" value={props.nomMunicipi.substring(5, props.nomMunicipi.length)} onChange={(e) => setMunicipi(e.target.value)} />
+          </FormGroup>
+
+          <FormGroup>
+            <h5 for="descripcipn">Descripcion evento</h5>
+            <Input type="textarea" name="comentario" id="comentario" value={descripcion} onChange={(e) => setDescripcion(e.target.value)} />
+          </FormGroup>
+          
+
+          <FormGroup>
+            <h5 for="fecha">fecha</h5>
+            <Input type="date" name="comentario" id="comentario" value={fecha} onChange={(e) => setFecha(e.target.value)} />
+          </FormGroup>
+
+          <FormGroup>
+            <h5 for="descripcipn">Tipo de evento</h5>
+            <Input type="date" name="tipoEvent" id="comentario" value={tipoEvent} onChange={(e) => setTipoEvent(e.target.value)} />
+          </FormGroup>
+
+          <FormGroup>
+            <h5 for="foto">Imagen</h5>
+            <InputStyle type="file" onChange={(e) => setFoto(e.target.files[0])}
+            />
+          </FormGroup>
+          <hr />{" "}
+          <button className="btn btn-success" onClick={() => guardar()}>
+            SAVE
         </button>
-      </Col>
-      : "" }
+        </Col>
+        : ""}
     </div>
   );
 };
