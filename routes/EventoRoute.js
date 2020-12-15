@@ -41,11 +41,12 @@ router.post("/evento", (req, res) => {
             return res.status(500).json(err)
         }
 
-
         const newEvento = {
+            
             nomEvent: req.body.nomEvent,
             nomPersona: req.body.nomPersona,
             descripcioEvent: req.body.descripcioEvent,
+            data : req.body.fecha,
             tipoEvent: req.body.tipoEvent,
             foto: req.file.filename,
             nomplatja : req.body.nomplatja,

@@ -9,6 +9,7 @@ app.use(cors());
 const opinionRoute = require('./routes/opinionRoute')
 const comarcaRoute = require('./routes/ComarcaRoute')
 const ubicacionRoute = require('./routes/ubicacionRoute')
+const eventoRoute = require('./routes/EventoRoute')
 
 
 
@@ -19,6 +20,8 @@ app.use("/" , opinionRoute)
 app.use("/" , comarcaRoute)
 app.use("/" , ubicacionRoute)
 app.use("/" , authRouter)
+app.use("/" , eventoRoute)
+
 
 /*
 app.use("/", express.static('front'));
