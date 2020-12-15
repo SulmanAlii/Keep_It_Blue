@@ -7,7 +7,7 @@ const comarca_real= require('./models/comarca2')
 
 
 
-const sequelize = new Sequelize('mapa','root','MySQLDatabase@1', {
+const sequelize = new Sequelize('mapa','root','admin1234', {
     host : 'localhost',
     dialect: 'mysql'
 })

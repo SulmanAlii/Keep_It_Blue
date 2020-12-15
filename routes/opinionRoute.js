@@ -39,7 +39,21 @@ router.get("/opinions/:cp", async (req,res) => {
     res.send(getOpinions)
 })
 
-
+// Query RAW Ricard
+router.get('/opinion/puntuaciones', function (req, res, next) {
+    sequelize.query(
+        `
+        SELECT nomplatja ,AVG(puntuacion) 
+        FROM opinion 
+        GROUP BY nomplatja
+        `,
+        { type: sequelize.QueryTypes.SELECT })
+        .then(dades => res.json({
+            ok: true,
+            data: dades
+        }))
+        .catch((error) => res.json({ ok: false, error: error }));
+});
 
 
 
