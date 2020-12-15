@@ -1,25 +1,34 @@
-import React, { Component } from 'react';
+import React, {useState } from 'react';
 import { MenuItems } from "./MenuItems";
 import { Button } from "./Button";
 import Mapa from '../Mapa';
-//  import './Navbar.css'; 
 import logo from './logo.png';
 import Contacto from './Contacto';
 import { BrowserRouter, Switch, Route,Link } from 'react-router-dom';
 import Signup from '../Signup';
 import Login from '../Login';
+import {connect} from 'react-redux';
 
 
-class Navbar extends Component {
 
-    state = { clicked: false }
+const Navbar = (props) =>  {
 
-    handleClick = () => {
-        this.setState({ clicked: !this.state.clicked })
+  const tokenn = JSON.parse(localStorage.getItem('token'))
+
+
+    const [clicked, setclicked] = useState(false)
+    const [token, settoken] = useState(tokenn)
+
+
+    const handleClick = () => {
+        setclicked(!clicked)
+    }
+
+    const deleteToken = () => {
+        localStorage.removeItem('token')
     }
 
 
-    render() {
         return (
             <BrowserRouter>
                 <nav className="NavbarItems">
@@ -29,10 +38,10 @@ class Navbar extends Component {
                             <i className=""></i> </h1>
                         </Link>
 
-                    <div className="menu-icon" onClick={this.handleClick}>
-                        <i className={this.state.clicked ? 'fa fa-times' : 'fa fa-bars'}></i>
+                    <div className="menu-icon" onClick={() => handleClick}>
+                        <i className={clicked ? 'fa fa-times' : 'fa fa-bars'}></i>
                     </div>
-                    <ul className={this.state.clicked ? 'nav-menu active' : 'nav-menu'}>
+                    <ul className={clicked ? 'nav-menu active' : 'nav-menu'}>
                         {MenuItems.map((item, index) => {
                             return (
                                 <li key={index}>
@@ -43,12 +52,16 @@ class Navbar extends Component {
                             )
                         })}
                     </ul>
-                    <Link to="/signup"><Button>Sign Up</Button></Link>
-                </nav>
+                    <div>
+                        <h4 style={{color :"white", background:"#3acbf7",fontSize:"1rem",margin:"0"}}>{token ?  'Hola '+ token.name : " "}</h4>
+                        <Link to='/login' ><Button onClick={() => deleteToken()}>  {token ? 'Sign Out' : 'Sign Up'}</Button></Link>
+                    </div>
+                    </nav>
+                
                 <Switch>
                     <Route exact path="/" render={() => <Mapa />} />
                     <Route path="/Contacta" render={() => <Contacto />} />
-                    <Route exact path="/signup" render={() => <Signup />}/>
+                    <Route exact path="/signup" render={() => {return token ?  <Mapa /> :  <Signup />}}/>
                     <Route exact path="/login" render={() => <Login />}/>
                     {/* <Route path="/Proyecto" render={() => <Proyecto />} /> */}
                     {/* <Route path="/Nosotros" render={() => <Nosotros />} /> */}
@@ -57,6 +70,17 @@ class Navbar extends Component {
                 </Switch>
             </BrowserRouter>
         )
-    }
 }
-export default Navbar
+
+const mapStateToProps = (state) => {
+    return {token : state.tokenData}
+}
+
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         get_token : (token) => dispatch({type: "get_tokenData", tokenData: token })
+//     }
+// }
+
+
+export default connect(mapStateToProps)(Navbar);

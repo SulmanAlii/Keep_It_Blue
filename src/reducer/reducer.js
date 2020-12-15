@@ -1,5 +1,6 @@
 const initialState = {
-    opiniones : []
+    opiniones : [],
+    tokenData : []
 }
 
 const reducer = (state = initialState, action) => {
@@ -10,6 +11,10 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 opiniones: state.opiniones.concat([{data: action.data}])
             }
+
+        case 'get_tokenData' : 
+            return {tokenData : state.tokenData.concat([{data:action.data}])}
+
     
         default:
             return state;

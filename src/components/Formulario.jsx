@@ -41,9 +41,6 @@ const Formulario =  (props) => {
    
     Controller.postComment(data)
     .then(data => {return props.getdata(data)})
-  
- 
-
   };
 
   const setPuntuacionBtn = (event) => {

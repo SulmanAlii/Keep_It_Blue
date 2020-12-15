@@ -6,9 +6,19 @@ img.opinion_img{
 }
 
 .main_container_opinion{
-    margin-top: 0.5rem;
+    margin-top: 2.5rem;
+}
+ul.nom_platja{
+    margin-bottom: 0;
 }
 
 ul.nom_platja li{
+    margin-right: 0.5rem;
+}
+h1.title{
+    margin-bottom: 1.4rem;
+}
+
+i.fa-circle{
     margin-right: 0.5rem;
 }
