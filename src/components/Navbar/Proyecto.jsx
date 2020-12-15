@@ -1,45 +1,49 @@
 import React from "react";
 import styled from 'styled-components'
 import bgimg from './sea3.jpg';
-import KeepItBlue from './KeepItBlue.png';
+// import KeepItBlue from './KeepItBlue.png';
 import Green from './Green.png';
 import White from './White.png';
 import Running from './Running.png';
 import Real from './Real.png';
-import Poster from './Poster.png';
+// import Poster from './Poster.png';
 import { Table } from 'reactstrap';
 
 
 const Proyecto = () => {
-    const Estilo = styled.div`
+    const Fondo = styled.div`
     background-image: url(${bgimg});
-    margin: 5px;
+    margin: 1%;
     border-radius: 5px; 
-    `
-    const Font = styled.div`
+    position: absolute;
+    width: 98%;
+    `   
+    const Content = styled.div`
     background-color:rgba(138, 219, 249, 0.8);
     padding: 15px;
     border-top: 5px;
     border-bot:5px;
     border-radius: 5px; 
+    width: 100%;
+    height: 100%;
     `
+	
     return (
         <>
-            <Estilo>
-                <Font>
-
-                    <h1>Proyecto</h1>
+            <Fondo>
+                <Content>
+                    <h1>Keep It Blue</h1>
                     <video controls width="400" height="400" margin="5px"
-                         loop muted
+                        loop muted
                         Poster="Poster.png">
                         <source src="playa1.webm" type="video/webm" />
                         <p>Su navegador no soporta video HTML5, pulse
                         <a href="playa1.webm">este enlace</a>
                         para descargarlo.</p>
                     </video>
-                  
+
                     <video controls width="400" height="400"
-                         loop muted
+                        loop muted
                         Poster="Poster.png">
                         <source src="playa2.mp4" type="video/mp4" />
                         <source src="playa2.webm" type="video/webm" />
@@ -47,24 +51,20 @@ const Proyecto = () => {
                         <a href="playa2.webm">este enlace</a>
                         para descargarlo.</p>
                     </video>
-
-                    <h1></h1>
-
-                    <h1>Lineas de futuro</h1>
-
+                    {/* <h1></h1> */}
+                    <h1>Líneas de futuro</h1>
                     <Table>
                         <thead>
                             <tr>
                                 <th>
                                     El proyecto es expansible a
-                                    la lipieza y mantenimiento de
+                                    la limpieza y mantenimiento de
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <th>1</th>
-
+                                <th></th>
                                 <td>
                                     Bosques
                                 </td>
@@ -72,41 +72,32 @@ const Proyecto = () => {
                                     Zonas de nieve
                                 </td>
                                 <td>
-                                    Rios
+                                    Ríos y lagos
                                 </td>
                                 <td>
-                                    Ciudad
+                                    Ciudades
                                 </td>
                             </tr>
                             <tr>
-                                <th>2</th>
-
+                                <th></th>
                                 <td>
-                                    <img className="logoForma" src={Green} alt='' width='110px'></img>
+                                    <img className="logoForma" src={Green} alt='Keep It Green' width='110px'></img>
                                 </td>
                                 <td>
-                                    <img className="logoForma" src={White} alt='' width='110px'></img>
+                                    <img className="logoForma" src={White} alt='Keep It White' width='110px'></img>
                                 </td>
                                 <td>
-                                    <img className="logoForma" src={Running} alt='' width='110px'></img>
+                                    <img className="logoForma" src={Running} alt='Keep It Runing' width='110px'></img>
                                 </td>
                                 <td>
-                                    <img className="logoForma" src={Real} alt='' width='110px'></img>
+                                    <img className="logoForma" src={Real} alt='Keep It Real' width='110px'></img>
                                 </td>
                             </tr>
                         </tbody>
                     </Table>
-
-
-
-                </Font>
-            </Estilo>
+                </Content>
+            </Fondo>
         </>
-
     );
-
-
-
 }
-
 export default Proyecto; 
