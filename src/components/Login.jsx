@@ -21,7 +21,7 @@ const login = () => {
         password : Password
     }
 
-    Axios.post('http://localhost:5000/login' , login_data)
+    Axios.post('https://keepit-blue.herokuapp.com/login' , login_data)
     .then((user) => {
         if(user.data.token){
             localStorage.setItem('token', JSON.stringify({token : user.data.token, name: user.data.user.name}));

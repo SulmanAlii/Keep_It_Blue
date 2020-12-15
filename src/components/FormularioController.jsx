@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const api_url = 'http://localhost:3000/contactos';
-const api_mapaPost = 'http://localhost:5000/opinion'
-const api_mapaEvento = 'http://localhost:5000/evento';
+const api_mapaPost = 'https://keepit-blue.herokuapp.com/opinion'
+const api_mapaEvento = 'https://keepit-blue.herokuapp.com/evento';
 
 export default class Controller {
 

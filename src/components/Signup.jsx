@@ -25,7 +25,7 @@ const Signup = (props) => {
             password : Password
         }
 
-        Axios.post('http://localhost:5000/signup', registerData)
+        Axios.post('https://keepit-blue.herokuapp.com/signup', registerData)
         .then(data => { return localStorage.setItem('token', JSON.stringify({token : data.data.token, name : data.data.user.name})), setVolver(true), setData(data)})
         .catch(err => console.log(err))
 
@@ -67,7 +67,7 @@ const Signup = (props) => {
 
 const mapStateToProps = (state) => {
     return {token : state.tokenData}
-    
+
 }
 
 

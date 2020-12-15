@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const api_url = 'http://localhost:5000/';
+const api_url = 'https://keepit-blue.herokuapp.com/';
 
 
 export default class Controller {

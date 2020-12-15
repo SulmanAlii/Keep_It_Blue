@@ -11,7 +11,7 @@ const Opinion = (props) => {
 
 
     useEffect(() =>  {
-        fetch("http://localhost:5000/opinions")
+        fetch("https://keepit-blue.herokuapp.com/opinions")
         .then(data => data.json())
         .then(opinions => setcomentarios(opinions))
         .catch(err => console.log("ERROR", err))
@@ -31,7 +31,7 @@ const Opinion = (props) => {
            return  <Col xs="12" sm="6" md="4" key={value.id}>
                         <h1 style={{display:"inline-block"}}>{value.nombre+"  "}</h1>
                         <h6 style={{display:"inline-block", float:"right"}}>{time}</h6>
-                            <img src={`http://localhost:5000/img/${value.foto}`} className="opinion_img" alt="IMAGE_OPINION"/>
+                            <img src={`https://keepit-blue.herokuapp.com/img/${value.foto}`} className="opinion_img" alt="IMAGE_OPINION"/>
                             <ul className="nom_platja">
                                 <li>{value.nomplatja},{value.nomcomarca.substring(5,value.nomcomarca.length)}</li>
                             </ul>
@@ -59,7 +59,7 @@ const Opinion = (props) => {
                       props.state?.map(value => {
                         return  <Col xs="4" key={value.data.data.item.id} className="m-3">
                                   <h1>{value.data.data.item.nombre}</h1>
-                                  <img src={`http://localhost:5000/img/${value.data.data.item.foto}`} className="opinion_img" alt="IMAGE_OPINION"/>
+                                  <img src={`https://keepit-blue.herokuapp.com/img/${value.data.data.item.foto}`} className="opinion_img" alt="IMAGE_OPINION"/>
                                   <h5>{value.data.data.item.opinion}</h5>
                                   <span>{Array.from({length : value.data.data.item.puntuacion}, () => <i class="fa fa-star" aria-hidden="true" style={{color:"#FFDF00"}}></i>) }</span>
                                 </Col>

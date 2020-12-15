@@ -30,12 +30,12 @@ const Mapa = () => {
 
   //Recibe CP y puntuacion media de la BBDD
   useEffect(() =>  {
-      fetch("http://localhost:5000/comarca/puntuaciones")
+      fetch("https://keepit-blue.herokuapp.com/comarca/puntuaciones")
       .then(data => data.json())
       .then(scores => setPuntuaciones(scores.data))
       .catch(err => console.log("ERROR", err));
 
-      fetch("http://localhost:5000/opinion/puntuaciones")
+      fetch("https://keepit-blue.herokuapp.com/opinion/puntuaciones")
       .then(data => data.json())
       .then(scores => setPuntuacionesPlayas(scores.data))
       .catch(err => console.log("ERROR", err));      
@@ -239,7 +239,7 @@ const Mapa = () => {
           {playas}
           <SetGeoJson />
         </MapContainer>
-      </Col >
+      </Col>
       <Col>
         {active ? <Formulario nomplaya={nomPlaya}  idcomarca={idcomarca} nomMunicipi={nomCiudad} active={active} setActive={setActive}/> : ""}
       </Col>
