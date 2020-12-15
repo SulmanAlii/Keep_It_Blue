@@ -18,7 +18,7 @@ app.use("/",express.static('public'))
 app.use("/" , opinionRoute)
 app.use("/" , comarcaRoute)
 app.use("/" , ubicacionRoute)
-app.use("/signup" , authRouter)
+app.use("/" , authRouter)
 
 /*
 app.use("/", express.static('front'));

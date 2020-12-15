@@ -3,6 +3,7 @@ const opinion = require('./models/opinion');
 const comarca = require('./models/comarca');
 const ubicacion = require('./models/ubicacion');
 const user = require('./models/users');
+const comarca_real= require('./models/comarca2')
 
 
 
@@ -15,6 +16,8 @@ const opinionTable = opinion(sequelize,Sequelize);
 const comarcaTable = comarca(sequelize,Sequelize);
 const ubicacionTable = ubicacion(sequelize,Sequelize);
 const users = user(sequelize,Sequelize);
+const comarca2 = comarca_real(sequelize,Sequelize);
+
 
 sequelize.sync()
 .then((db) => {
@@ -24,4 +27,4 @@ sequelize.sync()
 });
 
 
-module.exports = {sequelize, opinionTable, comarcaTable, ubicacionTable,users};
+module.exports = {sequelize, opinionTable, comarcaTable, ubicacionTable,users,comarca2};

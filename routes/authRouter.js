@@ -10,7 +10,7 @@ router.get('/', (req,res) => {
 })
 
 // Register
-router.post('/' , (req,res) => {
+router.post('/signup' , (req,res) => {
     const name = req.body.nombre;
     const email = req.body.email;
     const password = req.body.password;
@@ -23,7 +23,7 @@ router.post('/' , (req,res) => {
 
     users.findOne({where : {email : email}})
     .then((user) => { 
-        if(user) return res.status(400).json({msg : "Usuario ya registrado"})
+        if(user) return res.status(400).json({msg : "Usuario ya registrado"});
 
         req.body.password = bycrypt.hashSync(req.body.password, 10);
 
@@ -49,8 +49,43 @@ router.post('/' , (req,res) => {
 })
 
 
-router.get('/', (req,res) => {
-    const name = req.body
+router.post('/login', (req,res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    if(!email || !password){
+        res.status(400).json({msg : "Completa todos los campos"})
+    }
+
+
+    users.findOne({where : {email:email}})
+    .then(user => {
+        if (!user) {
+            res.status(400).json({msg : "usuario no existe"})
+        }
+
+       bycrypt.compare(password, user.password)
+       .then(password => {if(!password) return res.status(400).json({msg : "La contraseña es incorrecta"});
+
+           jwt.sign({id : user.id},'mypersonalsecretkey',{expiresIn : "10h"},(err,token) => {
+               res.json({
+                token: token,
+                user : {
+                     name : user.nombre,
+                     email : user.email
+                }
+               })
+           })
+       })
+    })
+
+
+
+
+
+
+
+
 })
 
 module.exports = router;
