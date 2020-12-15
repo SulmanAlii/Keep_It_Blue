@@ -6,7 +6,9 @@ import Green from './Green.png';
 import White from './White.png';
 import Running from './Running.png';
 import Real from './Real.png';
-// import Poster from './Poster.png';
+import Poster from './Poster.png';
+import playa2 from './playa2.mp4'
+import playa1 from './playa1.mp4'
 import { Table } from 'reactstrap';
 
 
@@ -35,23 +37,22 @@ const Proyecto = () => {
                     <h1>Keep It Blue</h1>
                     <video controls width="400" height="400" margin="5px"
                         loop muted
-                        Poster="Poster.png">
-                        <source src="playa1.webm" type="video/webm" />
+                        Poster={Poster}>
+                        <source src={playa1} type="video/mp4" />
                         <p>Su navegador no soporta video HTML5, pulse
                         <a href="playa1.webm">este enlace</a>
                         para descargarlo.</p>
                     </video>
-
+                    <span> </span>    
                     <video controls width="400" height="400"
                         loop muted
-                        Poster="Poster.png">
-                        <source src="playa2.mp4" type="video/mp4" />
-                        <source src="playa2.webm" type="video/webm" />
+                        Poster={Poster}>
+                        <source src={playa2} type="video/mp4" />
                         <p>Su navegador no soporta video HTML5, pulse
                         <a href="playa2.webm">este enlace</a>
                         para descargarlo.</p>
                     </video>
-                    {/* <h1></h1> */}
+                    
                     <h1>Líneas de futuro</h1>
                     <Table>
                         <thead>
