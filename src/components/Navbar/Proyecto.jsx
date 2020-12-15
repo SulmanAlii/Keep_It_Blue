@@ -71,10 +71,10 @@ const Proyecto = () => {
                                     Zonas de nieve
                                 </td>
                                 <td>
-                                    Rios
+                                    Ríos y lagos
                                 </td>
                                 <td>
-                                    Ciudad
+                                    Ciudades
                                 </td>
                             </tr>
                             <tr>
