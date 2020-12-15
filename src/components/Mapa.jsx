@@ -6,7 +6,6 @@ import { geoData } from './../datos/geo';
 import { beachOk } from './iconos';
 import { Col, Container,Row } from 'reactstrap';
 import Leaflet from "leaflet";
-import img from '../tree.png';
 import Formulario from './Formulario';
 import Opinion from './Opinion';
 import Palmera4 from "../img/Palmera4.png";
