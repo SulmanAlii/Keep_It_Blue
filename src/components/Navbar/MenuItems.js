@@ -6,28 +6,27 @@ export const MenuItems = [
     },
     {
         title: 'Contacta',
-        url: 'contacta',
+        url: 'Contacta',
         cName: 'nav-links'
     },
     {
         title: 'Proyecto',
-        url: '#',
+        url: 'Proyecto',
         cName: 'nav-links'
     },
     {
         title: 'Nosotros',
-        url: '#',
+        url: 'Nosotros',
         cName: 'nav-links'
     },
     {
-        title: 'Totem',
-        url: '#',
+        title: 'Crear Evento',
+        url: 'crear-evento',
         cName: 'nav-links'
     },
-
     {
-        title: 'Registrarse',
-        url: '#',
+        title: 'Registrate',
+        url: 'login',
         cName: 'nav-links-mobile'
     }
 

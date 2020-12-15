@@ -3,9 +3,9 @@ import { Col, Container,Form,FormGroup,Row,Button } from "reactstrap";
 import './contacto.css'
 import emailjs from 'emailjs-com'
 
+
+
 const Contacto = () => {
-
-
     const [Name, setName] = useState()
     const [Email, setEmail] = useState()
     const [City, setCity] = useState()
@@ -65,8 +65,8 @@ return (
     </Container>
 );
 
+  
 
+};
 
-}
-
-export default Contacto; 
+export default Contacto;

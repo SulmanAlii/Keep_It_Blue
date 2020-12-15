@@ -31,6 +31,7 @@ const Navbar = (props) =>  {
 
         return (
             <BrowserRouter>
+ 
                 <nav className="NavbarItems">
                     <Link to="/">
                         <h1 className="navbar-logo">
@@ -53,7 +54,7 @@ const Navbar = (props) =>  {
                         })}
                     </ul>
                     <div>
-                        <h4 style={{color :"white", background:"#3acbf7",fontSize:"1rem",margin:"0"}}>{token ?  'Hola '+ token.name : " "}</h4>
+                        <h4 style={{color :"white", background:"#3acbf7",fontSize:"1rem",margin:"0"}}>{token ?  'Hola '+ token.name : ""}</h4>
                         <Link to='/login' ><Button onClick={() => deleteToken()}>  {token ? 'Sign Out' : 'Sign Up'}</Button></Link>
                     </div>
                     </nav>

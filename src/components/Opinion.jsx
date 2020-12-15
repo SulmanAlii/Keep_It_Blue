@@ -27,8 +27,10 @@ const Opinion = (props) => {
 
 
         const posts = comentarios.map(value => {
-           return  <Col xs="4" key={value.id}>
-                        <h1>{value.nombre}</h1>
+            let time = value.createdAt.split("T",1);
+           return  <Col xs="12" sm="6" md="4" key={value.id}>
+                        <h1 style={{display:"inline-block"}}>{value.nombre+"  "}</h1>
+                        <h6 style={{display:"inline-block", float:"right"}}>{time}</h6>
                             <img src={`http://localhost:5000/img/${value.foto}`} className="opinion_img" alt="IMAGE_OPINION"/>
                             <ul className="nom_platja">
                                 <li>{value.nomplatja},{value.nomcomarca.substring(5,value.nomcomarca.length)}</li>
