@@ -29,18 +29,22 @@ const Formulario =  (props) => {
   // Guardamos la opinion
   const guardar = () => {
 
-    const data = new FormData();
-    data.append("nombre", nombre);
-    data.append("opinion", comentario);
-    data.append("file", foto);
-    data.append("puntuacion", puntuacion);
-    data.append("nomplatja", nomPlaya);
-    data.append("idcomarca", idcomarca);
-    data.append("nomcomarca", municipi);
+    
+      const data = new FormData();
+      data.append("nombre", nombre);
+      data.append("opinion", comentario);
+      data.append("file", foto);
+      data.append("puntuacion", puntuacion);
+      data.append("nomplatja", nomPlaya);
+      data.append("idcomarca", idcomarca);
+      data.append("nomcomarca", municipi);
+  
+     
+      Controller.postComment(data)
+      .then(data => {return props.getdata(data)})
+    
 
    
-    Controller.postComment(data)
-    .then(data => {return props.getdata(data)})
   };
 
   const setPuntuacionBtn = (event) => {
@@ -52,9 +56,8 @@ const Formulario =  (props) => {
     <div className="form">
     {props.active ? 
       <Col xs="12" className="form" >
-        <br />
         <div style={{ display: "flex", justifyContent: "space-between", width: "100%",}}>
-          <h3 style={{ width: "16rem" }}>Playa {props.nomplaya}</h3>
+          <h3>Playa {props.nomplaya}</h3>
           <Button onClick={() => props.setActive(false)}>X</Button>
         </div>
         <hr />
@@ -71,7 +74,7 @@ const Formulario =  (props) => {
           <h5 for="comentario">Comentario</h5>
           <Input type="textarea" name="comentario" id="comentario" value={comentario} onChange={(e) => setComentario(e.target.value)}/> 
         </FormGroup>
-        <h5 for="puntuacion">Puntuacion</h5>
+        <h5 for="puntuacion">Puntuación</h5>
         <div style={{ width: "9rem" }} className="puntuacionEstrellas" id="puntuacionEstrellas" value={puntuacion} >
               <div>
               <input type="radio" value="5" name="rate" id="rate-5" onChange={(e) => setPuntuacionBtn(e.target.value)}/>

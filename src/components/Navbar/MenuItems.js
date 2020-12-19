@@ -5,7 +5,7 @@ export const MenuItems = [
         cName: 'nav-links'
     },
     {
-        title: 'Contacta',
+        title: 'Contacto',
         url: 'Contacta',
         cName: 'nav-links'
     },
@@ -24,10 +24,10 @@ export const MenuItems = [
         url: 'crearEvento',
         cName: 'nav-links'
     },
-    {
-        title: 'Registrate',
-        url: 'login',
-        cName: 'nav-links-mobile'
-    }
+    // {
+    //     title: localStorage.getItem('token') ? 'Cerrar sesión' : 'Registrate',
+    //     url: 'login',
+    //     cName: 'nav-links-mobile'
+    // }
 
 ]

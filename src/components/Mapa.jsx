@@ -13,6 +13,7 @@ import Palmera3 from "../img/Palmera3.png";
 import Palmera2 from "../img/Palmera2.png";
 import Palmera1 from "../img/Palmera1.png";
 import Palmera5 from "../img/Palmera5.png";
+import { Redirect } from "react-router-dom";
 
 
 // Token mapbox
@@ -213,7 +214,7 @@ const Mapa = () => {
     <Marker key={idx} position={[playa["-l"], playa["-o"]]} icon={icono(playa["-t"])} >
       <Popup>
         {playa["-t"]}
-        <i class="fa fa-plus" aria-hidden="true" onClick={() => addtoform(playa["-t"],playa["-i"],playa.m["-t"])} ></i>
+        <i className="fa fa-plus" aria-hidden="true" onClick={() => addtoform(playa["-t"],playa["-i"],playa.m["-t"])} ></i>
       </Popup>
     </Marker>
   )); 
@@ -225,7 +226,7 @@ const Mapa = () => {
   return (
     <Container fluid className="mt-4">
       <Row>
-      <Col xs={active ? "7" : "12"} >
+      <Col md={active ? "7" : "12"} >
         {/* <select className="custom-select" id="inputGroupSelect01">
           <option value="" selected>Escoge la playa ...</option>
           {selectplaya}
@@ -241,7 +242,7 @@ const Mapa = () => {
         </MapContainer>
       </Col>
       <Col>
-        {active ? <Formulario nomplaya={nomPlaya}  idcomarca={idcomarca} nomMunicipi={nomCiudad} active={active} setActive={setActive}/> : ""}
+        {active ? <Formulario nomplaya={nomPlaya}  idcomarca={idcomarca} nomMunicipi={nomCiudad} active={active} setActive={setActive}/> : ''}
       </Col>
       </Row>
       <Opinion />

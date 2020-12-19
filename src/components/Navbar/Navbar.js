@@ -4,7 +4,7 @@ import { MenuItems } from "./MenuItems";
 import { Button } from "./Button";
 import Mapa from "../Mapa";
 import Contacto from "./Contacto";
-import { BrowserRouter, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Link, Redirect } from "react-router-dom";
 import Signup from "../Signup";
 import Login from "../Login";
 import KeepItBlue from "./KeepItBlue.png";
@@ -28,29 +28,37 @@ class Navbar extends React.Component {
       clicked: false,
       token: tokenn,
     };
-  }
+  };
+
+  
 
   handleClick = () => {
     this.setState({ clicked: !this.state.clicked });
   };
 
   deleteToken = () =>{
-      localStorage.removeItem('token')
-  }
+      localStorage.removeItem('token');
+      
+      if (!localStorage.getItem('token')) {
+        <Redirect to="/login"/>
+        window.location.replace('/login')
+
+
+      }
+  };
+
+  
 
   render() {
     return (
       <BrowserRouter>
         <nav className="NavbarItems">
-          <h1 className="navbar-logo">
             <img
               className="logoForma"
               src={KeepItBlue}
               alt="Keep It Blue Logo"
               width="110px"
             ></img>
-            <i className=""></i>{" "}
-          </h1>
           <div className="menu-icon" onClick={this.handleClick}>
             <i
               className={this.state.clicked ? "fa fa-times" : "fa fa-bars"}
@@ -60,14 +68,15 @@ class Navbar extends React.Component {
             {MenuItems.map((item, index) => {
               return (
                 <li key={index}>
-                  <a className={item.cName} href={item.url}>
+                  <Link className={item.cName} to={item.url}>
                     {item.title}
-                  </a>
+                      {item.url === 'login' ? localStorage.removeItem('token') : ''}
+                  </Link>
                 </li>
               );
             })}
           </ul>
-          <div>
+          <div className="logout_section">
             <h4
               style={{
                 color: "white",
@@ -79,9 +88,8 @@ class Navbar extends React.Component {
               {this.state.token ? "Hola " + this.state.token.name : ""}
             </h4>
             <Link to="/login">
-              <Button onClick={this.deleteToken}>
-                {" "}
-                {this.state.token ? "Sign Out" : "Sign Up"}
+              <Button onClick={this.deleteToken} className="p-1">
+                {this.state.token ? "Cerrar sesión" : "Iniciar sesión"}
               </Button>
             </Link>
           </div>
@@ -112,6 +120,8 @@ class Navbar extends React.Component {
     );
   }
 }
+
+
 
 const mapStateToProps = (state) => {
   return { token: state.tokenData };

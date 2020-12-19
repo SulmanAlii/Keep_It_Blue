@@ -215,7 +215,7 @@ const EventoMapa = () => {
     <Marker key={idx} position={[playa["-l"], playa["-o"]]} icon={icono(playa["-t"])} >
       <Popup>
         {playa["-t"]}
-        <i class="fa fa-plus" aria-hidden="true" onClick={() => addtoform(playa["-t"],playa["-i"],playa.m["-t"])} ></i>
+        <i className="fa fa-plus" aria-hidden="true" onClick={() => addtoform(playa["-t"],playa["-i"],playa.m["-t"])} ></i>
       </Popup>
     </Marker>
   )); 

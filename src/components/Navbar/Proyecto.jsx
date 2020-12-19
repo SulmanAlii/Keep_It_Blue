@@ -35,7 +35,7 @@ const Proyecto = () => {
             <Fondo>
                 <Content>
                     <h1>Keep It Blue</h1>
-                    <video controls width="400" height="400" margin="5px"
+                    <video controls width="100%" height="400" margin="5px"
                         loop muted
                         Poster={Poster}>
                         <source src={playa1} type="video/mp4" />
@@ -44,7 +44,7 @@ const Proyecto = () => {
                         para descargarlo.</p>
                     </video>
                     <span> </span>    
-                    <video controls width="400" height="400"
+                    <video controls width="100%" height="400"
                         loop muted
                         Poster={Poster}>
                         <source src={playa2} type="video/mp4" />
@@ -54,44 +54,38 @@ const Proyecto = () => {
                     </video>
                     
                     <h1>Líneas de futuro</h1>
+                    <h4>El poyecto es expansible a la limpieza y mantenimiento.</h4>
                     <Table>
                         <thead>
                             <tr>
                                 <th>
-                                    El proyecto es expansible a
-                                    la limpieza y mantenimiento de
+                                    Bosques
+                                </th>
+                                <th>
+                                    Zonas de nieve
+                                </th>
+                                <th>
+                                    Ríos y lagos
+                                </th>
+                                <th>
+                                    Ciudades
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
+                           
                             <tr>
-                                <th></th>
                                 <td>
-                                    Bosques
+                                    <img className="logoForma logoForma_" src={Green} alt='Keep It Green' width='110px'></img>
                                 </td>
                                 <td>
-                                    Zonas de nieve
+                                    <img className="logoForma logoForma_" src={White} alt='Keep It White' width='110px'></img>
                                 </td>
                                 <td>
-                                    Ríos y lagos
+                                    <img className="logoForma logoForma_" src={Running} alt='Keep It Runing' width='110px'></img>
                                 </td>
                                 <td>
-                                    Ciudades
-                                </td>
-                            </tr>
-                            <tr>
-                                <th></th>
-                                <td>
-                                    <img className="logoForma" src={Green} alt='Keep It Green' width='110px'></img>
-                                </td>
-                                <td>
-                                    <img className="logoForma" src={White} alt='Keep It White' width='110px'></img>
-                                </td>
-                                <td>
-                                    <img className="logoForma" src={Running} alt='Keep It Runing' width='110px'></img>
-                                </td>
-                                <td>
-                                    <img className="logoForma" src={Real} alt='Keep It Real' width='110px'></img>
+                                    <img className="logoForma logoForma_" src={Real} alt='Keep It Real' width='110px'></img>
                                 </td>
                             </tr>
                         </tbody>

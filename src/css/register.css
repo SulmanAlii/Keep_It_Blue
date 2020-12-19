@@ -17,6 +17,7 @@ h2.title{
 div.input_fields{
     border: 1px solid #dedede;
     padding: 3rem;
+    width: 50%;
 }
 
 div.input_fields input{

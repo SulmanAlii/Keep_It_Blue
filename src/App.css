@@ -1,10 +1,3 @@
-
-
-.leaflet-container {
-  height: 70vh;
-  z-index: 5;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -12,6 +5,13 @@
   font-family: 'Montserrat', sans-serif;
   /* background-image: url('/components/Navbar/planet.png'); */
 }
+
+
+.leaflet-container {
+  height: 70vh;
+  z-index: 5;
+}
+
 
 .legend {
   line-height: 18px;
@@ -45,10 +45,10 @@
 }
 
 .logoForma{
-
   border-radius: 50%;
-  height: 6rem;
-  width: 9rem;
+  height: 5rem;
+  margin-left: 0.4rem;
+  margin-right: 0.5rem;
 }        
 
 .fa-react {
@@ -57,15 +57,13 @@
 }
 
 .nav-menu {
-  display: grid;
-  grid-template-columns: repeat(5, auto);
-  grid-gap: 10px;
-  list-style: none;
-  text-align: center;
-  width: 70vw;
-  justify-content: end;
-  margin-right: 2rem;
-  margin-top: 25px ;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    flex: 1;
+    width: 100%;
+    margin-right: 2rem;
+    margin-top: 25px;
 }
 
 .nav-links {
@@ -74,6 +72,7 @@
   padding: 0.5rem 1rem;
   z-index: 10;
 }
+
 
 .nav-links:hover {
   background-color: #34c5e9;
@@ -96,16 +95,40 @@
   display: none;
 }
 
+div.logout_section{
+  margin-right: 1rem;
+}
+.btn--medium{
+  padding: 4px 8px !important;
+  border-radius: 4px;
+  font-size: 14px;
+  color: #fff;
+}
+
 @media screen and (max-width: 960px) {
   .NavbarItems {
       position: relative;
   }
 
+  .logoForma{
+    position: absolute;
+    margin-right: 3.5rem;
+    height: 5rem;
+    width: 5rem;
+
+  }        
+  
+
+  div.logout_section{
+    position: absolute;
+    right: -0.5rem;
+    padding: 4px 3px;
+    color: #fff;
+  }
   .nav-menu {
       display: flex;
       flex-direction: column;
       width: 100%;
-      height: 500px;
       position: absolute;
       top: 80px;
       left: -100%;
@@ -142,13 +165,12 @@
   }
 
   .menu-icon {
-      display: block;
-      position: absolute;
-      top: 0;
-      right: 0;
-      transform: translate(-100%, 60%);
-      font-size: 1.8rem;
-      cursor: pointer;
+    display: block;
+    position: absolute;
+    left: 0px;
+    transform: translate(50%);
+    font-size: 1.8rem;
+    cursor: pointer;
   }
 
   .fa-times {
@@ -180,3 +202,17 @@
   }
 }
 
+
+
+@media(max-width : 450px){
+  img.logoForma_{
+    height: 2rem;
+    width: 3rem;
+  }
+  .table th{
+    padding: 0 !important;
+  }
+  div.logout_section{
+    width: 6rem;
+  }
+}

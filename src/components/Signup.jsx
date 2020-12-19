@@ -17,8 +17,6 @@ const Signup = (props) => {
 
     const register = () => {
 
-        console.log("see");
-
         const registerData = {
             nombre : name,
             email : Email,
@@ -26,10 +24,10 @@ const Signup = (props) => {
         }
 
         Axios.post('https://keepit-blue.herokuapp.com/signup', registerData)
-        .then(data => { return localStorage.setItem('token', JSON.stringify({token : data.data.token, name : data.data.user.name})), setVolver(true), setData(data)})
+        .then(data => { return localStorage.setItem('token', JSON.stringify({token : data.data.token, name : data.data.user.name})), setVolver(true), setData(data),props.get_token(data),window.location.reload()})
         .catch(err => console.log(err))
 
-        props.get_token(data)
+        console.log(props.token);
     }
 
 
@@ -44,17 +42,17 @@ const Signup = (props) => {
                 <Col>
                 <div className="register">
                 <div className="input_fields">
-                <h2  className="title"><b>CREATE AN ACCOUNT</b></h2>
+                <h2  className="title"><b>Registrate</b></h2>
                     <form>
                         <Label>Name</Label> <br/>
-                        <input type="text" placeholder="Enter your Name" value={name} onChange={(e) => setName(e.target.value)} required/> <br/>
-                        <Label >Email</Label> <br/>
-                        <input type="email" placeholder="Enter your Email" value={Email} onChange={(e) => setEmail(e.target.value)} required/> <br/>
-                        <Label >Password</Label> <br/>
-                        <input type="password"  placeholder="Enter your Password" value={Password} onChange={(e) => setPassword(e.target.value)}/> <br/>
+                        <input type="text" placeholder="Introduce tu Nombre" value={name} onChange={(e) => setName(e.target.value)} required/> <br/>
+                        <Label >Correo</Label> <br/>
+                        <input type="email" placeholder="Introduce tu Email" value={Email} onChange={(e) => setEmail(e.target.value)} required/> <br/>
+                        <Label >Contraseña</Label> <br/>
+                        <input type="password"  placeholder="Introduce tu Contraseña" value={Password} onChange={(e) => setPassword(e.target.value)}/> <br/>
                         <Button onClick={() => register()}>Register</Button>
                     </form>
-                   <small>Already have an account.<Link to="/login"><b style={{color:"black"}}>Login</b></Link></small>
+                   <small>Ya tienes cuenta.<Link to="/login"><b style={{color:"black"}}>Iniciar Sessión</b></Link></small>
                 </div>
             </div>
                 </Col>

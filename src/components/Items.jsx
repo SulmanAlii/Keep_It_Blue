@@ -99,7 +99,7 @@ const Items = () => {
     const tots = items.map((el) => (
         <Rectangulo key={el.id}><div ><img width="230px" height="220" src={el.imagen} /> </div>
             <Corazon onClick={() => sumadorLikes(el.id)}>
-                <i style={{ color: "red" }} class="fa fa-heart-o" aria-hidden="true">{sumadorLikes}</i>
+                <i style={{ color: "red" }} className="fa fa-heart-o" aria-hidden="true">{sumadorLikes}</i>
             </Corazon>
 
             <h3>Likes: {el.likes}</h3>

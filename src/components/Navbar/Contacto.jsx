@@ -32,6 +32,11 @@ const Contacto = () => {
         }).catch((err) => {
             console.log(err);
         });
+
+        setName('')
+        setEmail('')
+        setCity('')
+        setPregunta('')
     }
 
 
@@ -44,21 +49,21 @@ return (
                 <Form className="text-center form_contacto" onSubmit={onSubmit}>
                     <FormGroup className="form_group" >
                         <label htmlFor="name">Nombre</label><br/>
-                        <input type="text" placeholder="Enter Your Name" id="name"  name="user_name" value={Name}  onChange={(e) => setName(e.target.value)}/>
+                        <input type="text" placeholder=" Introduce tu Nombre" id="name"  name="user_name" value={Name}  onChange={(e) => setName(e.target.value)}/>
                     </FormGroup>
                     <FormGroup>
                         <label htmlFor="email">Email</label><br/>
-                        <input type="email" placeholder="Enter Your Email" id="email" value={Email}  name="user_email" onChange={(e) => setEmail(e.target.value)}/>
+                        <input type="email" placeholder=" Introduce tu correo" id="email" value={Email}  name="user_email" onChange={(e) => setEmail(e.target.value)}/>
                     </FormGroup>
                     <FormGroup>
                         <label htmlFor="Ciudad">Ciudad</label><br/>
-                        <input type="text" placeholder="Enter Your City" id="Ciudad" value={City}  name="city" onChange={(e) => setCity(e.target.value)}/>
+                        <input type="text" placeholder=" Intruduce una ciudad" id="Ciudad" value={City}  name="city" onChange={(e) => setCity(e.target.value)}/>
                     </FormGroup>
                     <FormGroup>
                         <label htmlFor="question">Pregunta</label><br/>
-                        <textarea type="text" placeholder="Ask Your Question" id="question" value={Pregunta}  name="pregunta" onChange={(e) => setPregunta(e.target.value)}/>
+                        <textarea type="text" placeholder=" Pregunta" id="question" value={Pregunta}  name="pregunta" onChange={(e) => setPregunta(e.target.value)}/>
                     </FormGroup>
-                    <Button className="contact_button" type="submit">SEND</Button>
+                    <Button className="contact_button" type="submit">ENVIAR</Button>
                 </Form>
             </Row>
         </Col>

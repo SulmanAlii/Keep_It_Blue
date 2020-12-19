@@ -15,6 +15,12 @@
 
 }
 
+
+button.btn_logout{
+    height: 3rem !important;
+    padding: 0.1rem !important;
+}
+
 .logoForma{
     border-radius: 50% ;
     height: 6rem;
